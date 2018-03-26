@@ -1,0 +1,11 @@
+odroid-c2-u-boot (2018.01.001) unstable; urgency=medium
+
+  * 2018.01
+
+ -- Heinrich Schuchardt <xypron.glpk@gmx.de>  Thu, 11 Jan 2018 18:01:19 +0100
+
+odroid-c2-u-boot (2017.11.001) unstable; urgency=medium
+
+  * 2017.11-rc2
+
+ -- Heinrich Schuchardt <xypron.glpk@gmx.de>  Mon, 23 Oct 2017 22:59:31 +0200
