@@ -21,8 +21,7 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || git submodule add -f \
-	https://github.com/xypron/u-boot-patches.git patch
+	test -d patch || git submodule update
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
 	cd denx && (git fetch origin || true)
