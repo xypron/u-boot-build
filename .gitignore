@@ -1,6 +1,7 @@
+boot.scr
 job.log
+u-boot.bin
 foo/
 denx/
 hardkernel/
 meson-tools/
-u-boot.bin

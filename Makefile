@@ -52,6 +52,8 @@ build:
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
 	cd denx && make -j6
+	mkimage -T script -C none -n 'bootefi snp.efi' \
+	-d config/boot.txt boot.scr
 
 clean:
 	test ! -d denx        || ( cd denx && make clean )
@@ -60,6 +62,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/bananapi/
 	cp denx/u-boot-sunxi-with-spl.bin $(DESTDIR)/usr/lib/u-boot/bananapi/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/bananapi/
+	cp boot.scr $(DESTDIR)/usr/lib/u-boot/bananapi/
 
 uninstall:
 	rm -rf $(DESTDIR)/usr/lib/u-boot/bananpi/
