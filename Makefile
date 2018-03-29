@@ -14,7 +14,7 @@ ifneq ("aarch64", $(MK_ARCH))
 endif
 undefine MK_ARCH
 
-export LOCALVERSION:=-R$(REVISION)
+export LOCALVERSION:=-D$(REVISION)
 
 all:
 	make prepare
@@ -43,18 +43,31 @@ prepare:
 
 build:
 	cd patch && (git fetch origin || true)
-	cd patch && (git checkout $(TAGPREFIX)$(TAG))
+	cd patch && (git checkout efi-next)
+	cd patch && (git rebase)
 	cd denx && git fetch
-	cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
-	grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
-	cd denx && ( git am --abort || true )
+	cd denx && (git fetch origin || true)
+	cd denx && (git fetch agraf || true)
+	# cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
+	# grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
+	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
+	# cd denx && git checkout $(TAGPREFIX)$(TAG)
 	cd denx && git checkout master
+	cd denx && ( git branch -D pre-build || true )
+	cd denx && git checkout agraf/efi-next -b pre-build
+	cd denx && git rebase origin/master
+	# cd denx && git checkout efi-next
+	# cd denx && git checkout master
+	# cd denx && git reset --hard HEAD~30
+	# cd denx && git rebase
+	# cd denx && git rebase origin/master
 	cd denx && ( git branch -D build || true )
-	cd denx && git checkout $(TAGPREFIX)$(TAG)
+	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
-	test ! -f patch/patch-$(TAG) || ( cd denx && ../patch/patch-$(TAG) )
-	cd denx && make distclean
+	# cd denx && ../patch/patch-$(TAG)
+	cd denx && ../patch/patch-efi-next.sh
+	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
 	cd denx && make -j6
