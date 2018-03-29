@@ -21,7 +21,7 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || git submodule update
+	test -d patch || git submodule init && git submodule update
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
 	cd denx && (git fetch origin || true)
@@ -56,6 +56,7 @@ build-ipxe:
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
+	cd patch && (git rebase)
 	test -f tftp/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)

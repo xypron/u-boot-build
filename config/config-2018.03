@@ -668,6 +668,7 @@ CONFIG_DM_SPI_FLASH=y
 #
 # UBI support
 #
+# CONFIG_CONFIG_UBI_SILENCE_MSG is not set
 # CONFIG_MTD_UBI is not set
 # CONFIG_BITBANGMII is not set
 # CONFIG_MV88E6352_SWITCH is not set
@@ -978,6 +979,7 @@ CONFIG_CONSOLE_SCROLL_LINES=5
 #
 # Watchdog Timer Support
 #
+# CONFIG_WATCHDOG is not set
 # CONFIG_BCM2835_WDT is not set
 # CONFIG_ULP_WATCHDOG is not set
 # CONFIG_WDT is not set
@@ -994,6 +996,7 @@ CONFIG_FS_FAT=y
 # CONFIG_FAT_WRITE is not set
 CONFIG_FS_FAT_MAX_CLUSTSIZE=65536
 # CONFIG_FS_JFFS2 is not set
+# CONFIG_UBIFS_SILENCE_MSG is not set
 # CONFIG_FS_CRAMFS is not set
 # CONFIG_YAFFS2 is not set
 
