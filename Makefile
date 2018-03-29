@@ -19,8 +19,6 @@ export LOCALVERSION:=-R$(REVISION)
 all:
 	make prepare
 	make build
-	make fip_create
-	make sign
 
 prepare:
 	test -d patch || git submodule update
