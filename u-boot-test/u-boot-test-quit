@@ -1,0 +1,2 @@
+#!/bin/sh
+echo quit | socat - UNIX-CONNECT:/tmp/u-boot-monitor-socket
