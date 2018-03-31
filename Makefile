@@ -86,6 +86,11 @@ build:
 	cd denx && make -j$(NPROC)
 
 check:
+	cd denx && qemu-system-arm -M vexpress-a15 -cpu cortex-a15 \
+	-kernel u-boot \
+	-net user -net nic,model=lan9118 \
+	-m 1024M --nographic \
+	-drive if=sd,file=../img.vexpress,media=disk,format=raw
 
 clean:
 	cd denx && make distclean
