@@ -92,5 +92,10 @@ clean:
 	rm tftp/snp.efi
 
 install:
+	mkdir -p $(DESTDIR)/usr/lib/u-boot/bananapi/
+	cp denx/u-boot-sunxi-with-spl.bin $(DESTDIR)/usr/lib/u-boot/bananapi/
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/bananapi/
+	cp boot.scr $(DESTDIR)/usr/lib/u-boot/bananapi/
 
 uninstall:
+	rm -rf $(DESTDIR)/usr/lib/u-boot/bananpi/
