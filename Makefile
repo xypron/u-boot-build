@@ -55,7 +55,7 @@ build-ipxe:
 	cd ipxe && git checkout -b build
 	mkdir -p ipxe/src/config/local/
 	cp config/*.h ipxe/src/config/local/
-	cp config/boot.ipxe ipxe/src/config/local/
+	cp config/*.ipxe ipxe/src/config/local/
 	cd ipxe/src && make bin-arm32-efi/snp.efi -j$(NPROC) \
 	EMBED=config/local/chain.ipxe
 	cp ipxe/src/bin-arm32-efi/snp.efi tftp
@@ -63,6 +63,7 @@ build-ipxe:
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
+	cd patch && (git rebase)
 	test -f tftp/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
