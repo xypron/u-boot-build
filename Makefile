@@ -15,7 +15,6 @@ export PYTHONPATH
 
 MK_ARCH="${shell uname -m}"
 ifneq ("armv7l", $(MK_ARCH))
-	export ARCH=arm
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
