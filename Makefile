@@ -1,7 +1,7 @@
-# Build U-Boot for BananaPi
+# Build U-Boot for Versatile Express V2P-CA15-CA7 (TC2)
 .POSIX:
 
-TAG=2018.03
+TAG=2018.05
 TAGPREFIX=v
 REVISION=001
 
@@ -41,7 +41,7 @@ prepare:
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
-	test -d tftp || mkdir tftp
+	mkdir -p tftp
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
@@ -58,13 +58,13 @@ build-ipxe:
 	cp config/*.ipxe ipxe/src/config/local/
 	cd ipxe/src && make bin-arm32-efi/snp.efi -j$(NPROC) \
 	EMBED=config/local/chain.ipxe
-	cp ipxe/src/bin-arm32-efi/snp.efi tftp
 
 build:
+	test -f ipxe/src/bin-arm32-efi/snp.efi || make build-ipxe
+	cp ipxe/src/bin-arm32-efi/snp.efi tftp
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	test -f tftp/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
 	# cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
