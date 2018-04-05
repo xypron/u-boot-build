@@ -54,7 +54,7 @@ build-ipxe:
 	cd ipxe && git checkout -b build
 	mkdir -p ipxe/src/config/local/
 	cp config/*.h ipxe/src/config/local/
-	cp config/boot.ipxe ipxe/src/config/local/
+	cp config/*.ipxe ipxe/src/config/local/
 	cd ipxe/src && make bin-arm32-efi/snp.efi -j$(NPROC) \
 	EMBED=config/local/chain.ipxe
 	cp ipxe/src/bin-arm32-efi/snp.efi tftp
