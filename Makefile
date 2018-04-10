@@ -1,7 +1,7 @@
 # Build U-Boot for BananaPi
 .POSIX:
 
-TAG=2018.03
+TAG=2018.05
 TAGPREFIX=v
 REVISION=001
 
