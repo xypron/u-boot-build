@@ -100,8 +100,9 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/tinker/
-	mkimage -n rk3288 -T rksd -d denx/spl/u-boot-spl-dtb.bin \
-	  $(DESTDIR)/usr/lib/u-boot/tinker/spl.bin
-	cp denx/u-boot-dtb.img $(DESTDIR)/usr/lib/u-boot/tinker/
+	denx/tools/mkimage -n rk3288 -T rksd -d denx/spl/u-boot-spl-dtb.bin \
+	  $(DESTDIR)/usr/lib/u-boot/tinker/u-boot.img
+	cat denx/u-boot-dtb.bin >> $(DESTDIR)/usr/lib/u-boot/tinker/u-boot.img
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/tinker/
 
 uninstall:
