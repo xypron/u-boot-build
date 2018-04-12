@@ -1,4 +1,4 @@
-# Build U-Boot for Versatile Express V2P-CA15-CA7 (TC2)
+# Build U-Boot for the Tinker Board
 .POSIX:
 
 TAG=2018.05
@@ -15,7 +15,6 @@ export PYTHONPATH
 
 MK_ARCH="${shell uname -m}"
 ifneq ("armv7l", $(MK_ARCH))
-	export ARCH=arm
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
@@ -100,5 +99,9 @@ clean:
 	rm tftp/snp.efi
 
 install:
+	mkdir -p $(DESTDIR)/usr/lib/u-boot/tinker/
+	mkimage -n rk3288 -T rksd -d denx/spl/u-boot-spl-dtb.bin \
+	  $(DESTDIR)/usr/lib/u-boot/tinker/spl.bin
+	cp denx/u-boot-dtb.img $(DESTDIR)/usr/lib/u-boot/tinker/
 
 uninstall:
