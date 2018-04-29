@@ -1,4 +1,4 @@
-# Build U-Boot for Odroid C2
+# Build U-Boot for Banana Pi
 .POSIX:
 
 TAG=2018.03
@@ -8,8 +8,9 @@ REVISION=002
 MESON_TOOLS_TAG=v0.1
 
 MK_ARCH="${shell uname -m}"
-ifneq ("armv7l", $(MK_ARCH))
-	export ARCH=arm
+ifeq ("armv7l", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
