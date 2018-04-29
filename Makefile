@@ -14,7 +14,9 @@ PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
 MK_ARCH="${shell uname -m}"
-ifneq ("armv7l", $(MK_ARCH))
+ifeq ("armv7l", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
