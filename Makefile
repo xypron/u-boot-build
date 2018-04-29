@@ -13,6 +13,14 @@ export PATH
 PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
+MK_ARCH="${shell uname -m}"
+ifeq ("x86_64", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
+	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
+endif
+undefine MK_ARCH
+
 export LOCALVERSION:=-P$(REVISION)
 export BUILD_ROM=y
 
