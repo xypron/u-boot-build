@@ -95,6 +95,21 @@ check:
 	-m 1024M --nographic \
 	-drive if=sd,file=../img.vexpress,media=disk,format=raw
 
+check-gdb:
+	pkill qemu-system-arm || true
+	pkill agent-proxy || true
+	agent-proxy 4440^1234 localhost 2000 &
+	cd denx && qemu-system-arm -M vexpress-a15 -cpu cortex-a15 \
+	-kernel u-boot \
+	-net user -net nic,model=lan9118 \
+	-m 1024M --nographic \
+	-drive if=sd,file=../img.vexpress,media=disk,format=raw \
+	-chardev socket,id=char0,port=2000,host=localhost,ipv4,server \
+	-serial chardev:char0 &
+	sleep 1
+	telnet localhost 4440 || true
+	pkill qemu-system-arm || true
+	pkill agent-proxy || true
 clean:
 	cd denx && make distclean
 	rm tftp/snp.efi
