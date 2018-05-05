@@ -29,6 +29,8 @@ prepare:
 	cd denx && git fetch
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
+	cd denx && (git remote -v | grep agraf || \
+	git remote add agraf https://github.com/agraf/u-boot.git)
 	test -d hardkernel || git clone -v \
 	https://github.com/hardkernel/u-boot.git hardkernel
 	cd hardkernel && git fetch
