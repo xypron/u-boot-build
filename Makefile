@@ -89,21 +89,21 @@ build:
 	cd denx && make -j$(NPROC)
 
 check:
-	cd denx && qemu-system-arm -M vexpress-a15 -cpu cortex-a15 \
-	-kernel u-boot \
+	QEMU_AUDIO_DRV=none qemu-system-arm \
+	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
 	-net user -net nic,model=lan9118 \
 	-m 1024M --nographic \
-	-drive if=sd,file=../img.vexpress,media=disk,format=raw
+	-drive if=sd,file=img.vexpress,media=disk,format=raw
 
 check-gdb:
 	pkill qemu-system-arm || true
 	pkill agent-proxy || true
 	agent-proxy 4440^1234 localhost 2000 &
-	cd denx && qemu-system-arm -M vexpress-a15 -cpu cortex-a15 \
-	-kernel u-boot \
+	QEMU_AUDIO_DRV=none qemu-system-arm \
+	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
 	-net user -net nic,model=lan9118 \
 	-m 1024M --nographic \
-	-drive if=sd,file=../img.vexpress,media=disk,format=raw \
+	-drive if=sd,file=img.vexpress,media=disk,format=raw \
 	-chardev socket,id=char0,port=2000,host=localhost,ipv4,server \
 	-serial chardev:char0 &
 	sleep 1
