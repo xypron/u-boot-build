@@ -14,7 +14,9 @@ PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
 MK_ARCH="${shell uname -m}"
-ifneq ("armv7l", $(MK_ARCH))
+ifeq ("armv7l", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
@@ -27,7 +29,8 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || git submodule update
+	test -d patch/.git || \
+	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
 	cd denx && (git fetch origin || true)
@@ -36,7 +39,7 @@ prepare:
 	cd denx && git config sendemail.aliasesfile doc/git-mailrc
 	cd denx && git config sendemail.aliasfiletype mutt
 	gpg --list-keys 87F9F635D31D7652 || \
-	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
+	gpg --recv-key 87F9F635D31D7652
 	test -d ipxe || git clone -v \
 	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
