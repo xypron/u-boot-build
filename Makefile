@@ -39,7 +39,7 @@ prepare:
 	cd denx && git config sendemail.aliasesfile doc/git-mailrc
 	cd denx && git config sendemail.aliasfiletype mutt
 	gpg --list-keys 87F9F635D31D7652 || \
-	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
+	gpg --recv-key 87F9F635D31D7652
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
