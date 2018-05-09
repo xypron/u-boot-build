@@ -29,7 +29,7 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || \
+	test -d patch/.git || \
 	  git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
