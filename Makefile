@@ -14,8 +14,9 @@ PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
 MK_ARCH="${shell uname -m}"
-ifneq ("armv7l", $(MK_ARCH))
-	export ARCH=arm
+ifeq ("armv7l", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
 	export CROSS_COMPILE=arm-linux-gnueabihf-
 endif
 undefine MK_ARCH
@@ -28,7 +29,8 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || git submodule update
+	test -d patch/.git || \
+	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
 	cd denx && (git fetch origin || true)
