@@ -8,8 +8,9 @@ REVISION=002
 MESON_TOOLS_TAG=v0.1
 
 MK_ARCH="${shell uname -m}"
-ifneq ("aarch64", $(MK_ARCH))
-	export ARCH=arm64
+ifeq ("aarch64", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else
 	export CROSS_COMPILE=aarch64-linux-gnu-
 endif
 undefine MK_ARCH
