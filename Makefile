@@ -100,13 +100,13 @@ unit-tests:
 	cd denx && test/py/test.py --build-dir . --bd qemu-x86 -k test_efi_loader
 
 iso:
-	qemu-system-x86_64 -m 1G \
+	qemu-system-i386 -m 1G \
 	-net nic,vlan=0,macaddr=12:A1:00:12:34:02 \
 	-net tap,vlan=0,ifname=tap0,script=no,downscript=no \
 	-machine pc-i440fx-2.8 -drive file=ipxe.iso,if=ide,format=raw,media=cdrom
 
 liv:
-	qemu-system-x86_64 -m 1G -bios denx/u-boot.rom \
+	qemu-system-i386 -m 1G -bios denx/u-boot.rom \
 	-display sdl -vga cirrus -gdb tcp::1234 \
 	-net nic,vlan=0,macaddr=12:A1:00:12:34:02 \
 	-net tap,vlan=0,ifname=tap0,script=no,downscript=no \
@@ -133,7 +133,7 @@ luv:
 	-hda img | tee -a log
 
 sata:	
-	qemu-system-x86_64 -m 1G -bios denx/u-boot.rom -nographic \
+	qemu-system-i386 -m 1G -bios denx/u-boot.rom -nographic \
 	-netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0,mac=12:A1:00:12:34:13 -machine pc-i440fx-2.8 \
@@ -146,7 +146,7 @@ sata:
 	-device ide-drive,drive=Disk1,bus=ahci.0
 
 check:
-	qemu-system-x86_64 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
+	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
 	-netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5
