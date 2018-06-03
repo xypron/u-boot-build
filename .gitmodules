@@ -1,0 +1,12 @@
+[submodule "patch"]
+	path = patch
+	url = https://github.com/xypron/u-boot-patches.git
+[submodule "rkbin"]
+	path = rkbin
+	url = https://github.com/rockchip-linux/rkbin.git
+[submodule "rkdeveloptool"]
+	path = rkdeveloptool
+	url = https://github.com/rockchip-linux/rkdeveloptool.git
+[submodule "arm-trusted-firmware"]
+	path = arm-trusted-firmware
+	url = https://github.com/ARM-software/arm-trusted-firmware.git
