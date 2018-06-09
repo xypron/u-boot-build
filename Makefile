@@ -76,7 +76,7 @@ build:
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	# cd denx && git checkout $(TAGPREFIX)$(TAG)
-	cd denx && git checkout master
+	cd denx && git checkout master && git rebase
 	cd denx && ( git branch -D pre-build || true )
 	cd denx && git checkout agraf/efi-next -b pre-build
 	cd denx && git rebase origin/master
