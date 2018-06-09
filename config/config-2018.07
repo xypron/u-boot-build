@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.05 Configuration
+# U-Boot 2018.07-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -763,6 +763,7 @@ CONFIG_DM_RTC=y
 # CONFIG_RTC_DS1307 is not set
 # CONFIG_RTC_ISL1208 is not set
 # CONFIG_RTC_RX8010SJ is not set
+# CONFIG_RTC_MV is not set
 # CONFIG_RTC_S35392A is not set
 CONFIG_SCSI=y
 CONFIG_DM_SCSI=y
