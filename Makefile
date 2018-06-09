@@ -119,7 +119,10 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
-	denx/tools/mkimage -n rk3399 -T rksd -d denx/spl/u-boot-spl.bin \
+	denx/tools/mkimage -n rk3399 -T rksd \
+	-d rkbin/rk33/rk3399_ddr_800MHz_v1.08.bin \
+	  $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/idbspl.img
+	cat denx/spl/u-boot-spl-dtb.bin >> \
 	  $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/idbspl.img
 	cp denx/u-boot.itb $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/u-boot.itb
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
