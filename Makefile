@@ -1,7 +1,7 @@
 # Build U-Boot for Versatile Express V2P-CA15-CA7 (TC2)
 .POSIX:
 
-TAG=2018.05
+TAG=2018.07
 TAGPREFIX=v
 REVISION=001
 
@@ -76,7 +76,7 @@ build:
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	# cd denx && git checkout $(TAGPREFIX)$(TAG)
-	cd denx && git checkout master
+	cd denx && git checkout master && git rebase
 	cd denx && ( git branch -D pre-build || true )
 	cd denx && git checkout agraf/efi-next -b pre-build
 	cd denx && git rebase origin/master
