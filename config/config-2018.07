@@ -1060,6 +1060,7 @@ CONFIG_MD5=y
 # CONFIG_SPL_LZO is not set
 # CONFIG_SPL_GZIP is not set
 # CONFIG_ERRNO_STR is not set
+# CONFIG_HEXDUMP is not set
 CONFIG_OF_LIBFDT=y
 # CONFIG_OF_LIBFDT_OVERLAY is not set
 # CONFIG_SPL_OF_LIBFDT is not set
