@@ -45,11 +45,28 @@ prepare:
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
 
+build-ipxe:
+	cd ipxe && (git am --abort || true)
+	cd ipxe && (git fetch origin || true)
+	cd ipxe && (git am --abort || true)
+	cd ipxe && git reset --hard
+	cd ipxe && git checkout master
+	cd denx && ( git am --abort || true )
+	cd ipxe && git rebase
+	cd ipxe && ( git branch -D build || true )
+	cd ipxe && git checkout -b build
+	mkdir -p ipxe/src/config/local/
+	cp config/*.h ipxe/src/config/local/
+	cp config/*.ipxe ipxe/src/config/local/
+	cd ipxe/src && make bin-arm64-efi/snp.efi -j$(NPROC) \
+	EMBED=config/local/chain.ipxe
+	cp ipxe/src/bin-arm64-efi/snp.efi tftp
+
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	cd denx && git fetch
+	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
 	# cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
