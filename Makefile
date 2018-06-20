@@ -91,20 +91,14 @@ build:
 	cd patch && (git rebase)
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
-	# cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
-	# grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
+	cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
+	grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
-	# cd denx && git checkout $(TAGPREFIX)$(TAG)
-	cd denx && git checkout master && git rebase
-	cd denx && ( git branch -D pre-build || true )
-	cd denx && git checkout agraf/efi-next -b pre-build
-	cd denx && git rebase origin/master
+	cd denx && git checkout $(TAGPREFIX)$(TAG)
 	cd denx && ( git branch -D build || true )
-	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
 	# cd denx && ../patch/patch-$(TAG)
-	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
@@ -119,12 +113,18 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
+	cd rkbin && (git fetch || true)
+	cd rkbin && git checkout master && git rebase
+	cd rkbin && git checkout 784b3ef28e746e6e3ddb6fe13421a42c374c9bb4
 	denx/tools/mkimage -n rk3399 -T rksd \
-	-d rkbin/rk33/rk3399_ddr_800MHz_v1.08.bin \
-	  $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/idbspl.img
-	cat denx/spl/u-boot-spl-dtb.bin >> \
-	  $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/idbspl.img
-	cp denx/u-boot.itb $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/u-boot.itb
+	-d rkbin/rk33/rk3399_ddr_800MHz_v1.08.bin idbloader.img
+	cat rkbin/rk33/rk3399_miniloader_v1.06.bin >> idbloader.img
+	rkbin/tools/trust_merger trust.ini	
+	rkbin/tools/loaderimage --pack --uboot denx/u-boot-dtb.bin uboot.img \
+	  0x200000
+	cp idbloader.img $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
+	cp trust.img $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/	
+	cp uboot.img $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/firefly-rk3399/
 
 uninstall:
