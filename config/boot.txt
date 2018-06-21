@@ -1,1 +1,0 @@
-load mmc 1:1 ${fdt_addr_r} dtb && load mmc 1:1 ${kernel_addr_r} snp.efi && bootefi ${kernel_addr_r} ${fdt_addr_r}
