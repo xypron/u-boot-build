@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.07-rc1 Configuration
+# U-Boot 2018.07-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -387,6 +387,7 @@ CONFIG_CMD_DNS=y
 #
 # CONFIG_CMD_BMP is not set
 # CONFIG_CMD_BSP is not set
+CONFIG_CMD_BLOCK_CACHE=y
 # CONFIG_CMD_CACHE is not set
 # CONFIG_CMD_DISPLAY is not set
 # CONFIG_CMD_LED is not set
@@ -540,7 +541,7 @@ CONFIG_AHCI_PCI=y
 # CONFIG_SATA_SIL3114 is not set
 CONFIG_BLK=y
 CONFIG_HAVE_BLOCK_DEVICE=y
-# CONFIG_BLOCK_CACHE is not set
+CONFIG_BLOCK_CACHE=y
 CONFIG_IDE=y
 # CONFIG_BOOTCOUNT_LIMIT is not set
 
@@ -1042,6 +1043,10 @@ CONFIG_REGEX=y
 # CONFIG_AES is not set
 # CONFIG_RSA is not set
 # CONFIG_TPM is not set
+
+#
+# Android Verified Boot
+#
 
 #
 # Hashing Support
