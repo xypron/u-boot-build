@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.07-rc1 Configuration
+# U-Boot 2018.07-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -603,7 +603,10 @@ CONFIG_BLOCK_CACHE=y
 #
 # Clock
 #
-# CONFIG_CLK is not set
+CONFIG_CLK=y
+# CONFIG_CLK_HSDK is not set
+# CONFIG_CLK_AT91 is not set
+# CONFIG_ICS8N3QV01 is not set
 # CONFIG_CPU is not set
 
 #
@@ -1025,6 +1028,10 @@ CONFIG_LIB_RAND=y
 # CONFIG_AES is not set
 # CONFIG_RSA is not set
 # CONFIG_TPM is not set
+
+#
+# Android Verified Boot
+#
 
 #
 # Hashing Support
