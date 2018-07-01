@@ -66,7 +66,13 @@ build:
 
 check:
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
-	-bios denx/u-boot.bin --nographic -netdev \
+	-bios denx/u-boot.bin -nographic -netdev \
+	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
+	-device e1000,netdev=eth0
+
+debug:
+	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
+	-bios denx/u-boot.bin -nographic -gdb tcp::1234 -netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0
 
