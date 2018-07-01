@@ -39,11 +39,32 @@ prepare:
 	cd meson-tools && git fetch
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
+	test -d ipxe || git clone -v \
+	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
+	mkdir -p tftp
+
+build-ipxe:
+	cd ipxe && (git am --abort || true)
+	cd ipxe && (git fetch origin || true)
+	cd ipxe && (git am --abort || true)
+	cd ipxe && git reset --hard
+	cd ipxe && git checkout master
+	cd denx && ( git am --abort || true )
+	cd ipxe && git rebase
+	cd ipxe && ( git branch -D build || true )
+	cd ipxe && git checkout -b build
+	mkdir -p ipxe/src/config/local/
+	cp config/*.h ipxe/src/config/local/
+	cp config/*.ipxe ipxe/src/config/local/
+	cd ipxe/src && make bin-arm64-efi/snp.efi -j$(NPROC) \
+	EMBED=config/local/chain.ipxe
 
 build:
+	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
+	cp ipxe/src/bin-arm64-efi/snp.efi tftp
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
