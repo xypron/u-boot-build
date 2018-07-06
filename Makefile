@@ -31,12 +31,6 @@ prepare:
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
 	cd denx && (git remote -v | grep agraf || \
 	git remote add agraf https://github.com/agraf/u-boot.git)
-	test -d hardkernel || git clone -v \
-	https://github.com/hardkernel/u-boot.git hardkernel
-	cd hardkernel && git fetch
-	test -d meson-tools || git clone -v \
-	https://github.com/afaerber/meson-tools.git meson-tools
-	cd meson-tools && git fetch
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -d ipxe || git clone -v \
