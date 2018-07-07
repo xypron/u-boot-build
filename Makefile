@@ -59,9 +59,6 @@ build-ipxe:
 build:
 	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
 	cp ipxe/src/bin-arm64-efi/snp.efi tftp
-	cd patch && (git fetch origin || true)
-	cd patch && (git checkout efi-next)
-	cd patch && (git rebase)
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
 	cd denx && (git am --abort || true)
@@ -73,6 +70,11 @@ build:
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
+	cd patch && (git fetch origin || true)
+	cd patch && (git am --abort || true)
+	cd patch && (git reset --hard)
+	cd patch && (git checkout efi-next)
+	cd patch && (git rebase)
 	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
