@@ -71,24 +71,15 @@ build:
 	test -f tftp/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
-	# cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
-	# grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
-	# cd denx && git checkout $(TAGPREFIX)$(TAG)
 	cd denx && git checkout master && git rebase
 	cd denx && ( git branch -D pre-build || true )
 	cd denx && git checkout agraf/efi-next -b pre-build
 	cd denx && git rebase origin/master
-	# cd denx && git checkout efi-next
-	# cd denx && git checkout master
-	# cd denx && git reset --hard HEAD~30
-	# cd denx && git rebase
-	# cd denx && git rebase origin/master
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
-	# cd denx && ../patch/patch-$(TAG)
 	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
