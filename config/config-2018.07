@@ -768,8 +768,8 @@ CONFIG_DM_RTC=y
 # CONFIG_RTC_DS1307 is not set
 # CONFIG_RTC_ISL1208 is not set
 # CONFIG_RTC_RX8010SJ is not set
-# CONFIG_RTC_MV is not set
 # CONFIG_RTC_PL031 is not set
+# CONFIG_RTC_MV is not set
 # CONFIG_RTC_S35392A is not set
 CONFIG_SCSI=y
 CONFIG_DM_SCSI=y
@@ -799,6 +799,7 @@ CONFIG_SYS_NS16550=y
 # CONFIG_PL01X_SERIAL is not set
 # CONFIG_MSM_SERIAL is not set
 # CONFIG_PXA_SERIAL is not set
+# CONFIG_SMEM is not set
 
 #
 # Sound support
@@ -844,9 +845,11 @@ CONFIG_DM_SPI=y
 #
 # System reset device drivers
 #
-# CONFIG_SYSRESET is not set
+CONFIG_SYSRESET=y
+# CONFIG_SYSRESET_GPIO is not set
 # CONFIG_SYSRESET_SYSCON is not set
 # CONFIG_SYSRESET_WATCHDOG is not set
+CONFIG_SYSRESET_X86=y
 # CONFIG_DM_THERMAL is not set
 
 #
