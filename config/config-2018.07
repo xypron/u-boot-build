@@ -1081,6 +1081,7 @@ CONFIG_MD5=y
 CONFIG_OF_LIBFDT=y
 # CONFIG_OF_LIBFDT_OVERLAY is not set
 # CONFIG_SPL_OF_LIBFDT is not set
+# CONFIG_FDT_FIXUP_PARTITIONS is not set
 
 #
 # System tables
