@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.07 Configuration
+# U-Boot 2018.09-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -821,6 +821,7 @@ CONFIG_DM_SPI=y
 # CONFIG_ICH_SPI is not set
 # CONFIG_MVEBU_A3700_SPI is not set
 # CONFIG_ROCKCHIP_SPI is not set
+# CONFIG_SUN4I_SPI is not set
 # CONFIG_TEGRA114_SPI is not set
 # CONFIG_TEGRA20_SFLASH is not set
 # CONFIG_TEGRA20_SLINK is not set
@@ -990,6 +991,7 @@ CONFIG_FRAMEBUFFER_VESA_MODE=0x111
 # CONFIG_VIDEO_LCD_ANX9804 is not set
 # CONFIG_VIDEO_LCD_SSD2828 is not set
 # CONFIG_VIDEO_MVEBU is not set
+# CONFIG_I2C_EDID is not set
 # CONFIG_DISPLAY is not set
 # CONFIG_ATMEL_HLCD is not set
 # CONFIG_VIDEO_BROADWELL_IGD is not set
@@ -1081,7 +1083,6 @@ CONFIG_MD5=y
 CONFIG_OF_LIBFDT=y
 # CONFIG_OF_LIBFDT_OVERLAY is not set
 # CONFIG_SPL_OF_LIBFDT is not set
-# CONFIG_FDT_FIXUP_PARTITIONS is not set
 
 #
 # System tables
