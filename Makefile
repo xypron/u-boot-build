@@ -57,6 +57,7 @@ build-ipxe:
 	cd ipxe && git rebase
 	cd ipxe && ( git branch -D build || true )
 	cd ipxe && git checkout -b build
+	cd ipxe && ../patch/patch-ipxe.sh
 	mkdir -p ipxe/src/config/local/
 	cp config/*.h ipxe/src/config/local/
 	cp config/boot.ipxe ipxe/src/config/local/
