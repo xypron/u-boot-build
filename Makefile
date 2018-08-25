@@ -60,7 +60,6 @@ build-ipxe:
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
-	cd patch && (git reset --hard)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
 	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
