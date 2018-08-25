@@ -67,6 +67,7 @@ build-ipxe:
 
 build:
 	cd patch && (git fetch origin || true)
+	cd patch && (git am --abort || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
 	test -f tftp/snp.efi || make build-ipxe
