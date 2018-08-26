@@ -92,8 +92,10 @@ build:
 check:
 
 clean:
-	cd denx && make distclean
-	rm tftp/snp.efi
+	cd ipxe/src && make clean
+	rm -rf ipxe/src/bin-arm32-efi
+	cd denx && make mrproper
+	rm -f tftp/snp.efi
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/bananapi/
