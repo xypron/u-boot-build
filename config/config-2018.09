@@ -312,6 +312,7 @@ CONFIG_CMD_MEMORY=y
 #
 # CONFIG_CMD_ARMFLASH is not set
 # CONFIG_CMD_ADC is not set
+# CONFIG_CMD_BIND is not set
 # CONFIG_CMD_CLK is not set
 # CONFIG_CMD_DEMO is not set
 # CONFIG_CMD_DFU is not set
@@ -872,6 +873,7 @@ CONFIG_TIMER=y
 # CONFIG_ALTERA_TIMER is not set
 # CONFIG_ATMEL_PIT_TIMER is not set
 # CONFIG_CADENCE_TTC_TIMER is not set
+# CONFIG_DESIGNWARE_APB_TIMER is not set
 CONFIG_X86_TSC_TIMER=y
 # CONFIG_OMAP_TIMER is not set
 # CONFIG_AST_TIMER is not set
