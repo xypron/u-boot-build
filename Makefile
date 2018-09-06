@@ -26,7 +26,7 @@ prepare:
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
-	cd denx && git fetch
+	cd denx && (git fetch || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
 	cd denx && (git remote -v | grep agraf || \
