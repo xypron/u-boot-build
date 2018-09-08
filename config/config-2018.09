@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.09-rc2 Configuration
+# U-Boot 2018.09-rc3 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -394,6 +394,7 @@ CONFIG_CMD_DNS=y
 # CONFIG_CMD_BSP is not set
 CONFIG_CMD_BLOCK_CACHE=y
 # CONFIG_CMD_CACHE is not set
+CONFIG_CMD_CONITRACE=y
 # CONFIG_CMD_DISPLAY is not set
 # CONFIG_CMD_LED is not set
 CONFIG_CMD_DATE=y
