@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.09-rc3 Configuration
+# U-Boot 2018.09 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -852,6 +852,7 @@ CONFIG_DM_SERIAL=y
 # CONFIG_SYS_NS16550 is not set
 CONFIG_PL01X_SERIAL=y
 # CONFIG_MSM_SERIAL is not set
+# CONFIG_OMAP_SERIAL is not set
 # CONFIG_PXA_SERIAL is not set
 # CONFIG_SMEM is not set
 
