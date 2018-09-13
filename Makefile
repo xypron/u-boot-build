@@ -85,9 +85,9 @@ sct-prepare:
 	mkdir -p mnt
 	fusermount -u mnt || true
 	rm -f sct-arm64.part1
-	/usr/sbin/mkfs.vfat -C sct-arm64.part1 131071
+	/sbin/mkfs.vfat -C sct-arm64.part1 131071
 	fusefat sct-arm64.part1 mnt -o rw+
-	cp ../edk2/ShellBinPkg/MinUefiShell/Ia32/Shell.efi mnt/
+	cp ../edk2/ShellBinPkg/MinUefiShell/AArch64/Shell.efi mnt/
 	test -f UEFI2.6SCTII_Final_Release.zip || \
 	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
 	unzip UEFI2.6SCTII_Final_Release.zip -d mnt
@@ -97,7 +97,7 @@ sct-prepare:
 	cat sct-arm64.part1 >> sct-arm64.img
 	rm sct-arm64.part1
 	echo -e "image1: start= 2048, type=ef\n" | \
-	/usr/sbin/sfdisk sct-arm64.img
+	/sbin/sfdisk sct-arm64.img
 
 sct:
 	test -f sct-arm64.img || \
@@ -106,9 +106,8 @@ sct:
 	-bios denx/u-boot.bin -nographic -netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 \
-	-device virtio-scsi-pci,id=scsi \
-	-device scsi-hd,drive=hd \
-	-drive file=sct-arm64.img,if=none,id=hd,format=raw
+	-drive if=none,file=sct-arm64.img,id=mydisk \
+	-device nvme,drive=mydisk,serial=foo
 
 check:
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
