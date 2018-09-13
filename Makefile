@@ -7,6 +7,7 @@ REVISION=001
 
 MESON_TOOLS_TAG=v0.1
 
+UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
 	undefine CROSS_COMPILE
@@ -83,10 +84,10 @@ build:
 
 sct-prepare:
 	mkdir -p mnt
-	fusermount -u mnt || true
+	sudo umount mnt || true
 	rm -f sct-arm64.part1
 	/sbin/mkfs.vfat -C sct-arm64.part1 131071
-	fusefat sct-arm64.part1 mnt -o rw+
+	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/MinUefiShell/AArch64/Shell.efi mnt/
 	cp efi_shell.scr mnt/boot.scr
 	cp startup.nsh mnt/
@@ -97,8 +98,11 @@ sct-prepare:
 	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
 	cd sct.tmp && unzip UEFISCT.zip
 	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
+	cd sct.tmp && unzip IHVSCT.zip
+	cp sct.tmp/IHVSCT/SctPackageAARCH64/AARCH64/* mnt -R
 	rm -rf sct.tmp
 	rm -f sct-arm64.img
+	sudo umount mnt || true
 	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
 	cat sct-arm64.part1 >> sct-arm64.img
 	rm sct-arm64.part1
