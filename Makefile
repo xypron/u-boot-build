@@ -88,10 +88,16 @@ sct-prepare:
 	/sbin/mkfs.vfat -C sct-arm64.part1 131071
 	fusefat sct-arm64.part1 mnt -o rw+
 	cp ../edk2/ShellBinPkg/MinUefiShell/AArch64/Shell.efi mnt/
+	cp efi_shell.scr mnt/boot.scr
+	cp startup.nsh mnt/
 	test -f UEFI2.6SCTII_Final_Release.zip || \
 	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
-	unzip UEFI2.6SCTII_Final_Release.zip -d mnt
-	cd mnt && unzip UEFISCT.zip || true
+	rm -rf sct.tmp
+	mkdir sct.tmp
+	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
+	cd sct.tmp && unzip UEFISCT.zip
+	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
+	rm -rf sct.tmp
 	rm -f sct-arm64.img
 	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
 	cat sct-arm64.part1 >> sct-arm64.img
@@ -106,8 +112,8 @@ sct:
 	-bios denx/u-boot.bin -nographic -netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 \
-	-drive if=none,file=sct-arm64.img,id=mydisk \
-	-device nvme,drive=mydisk,serial=foo
+	-drive if=none,file=sct-arm64.img,id=mydisk -device ich9-ahci,id=ahci \
+	-device ide-drive,drive=mydisk,bus=ahci.0
 
 check:
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
@@ -122,7 +128,7 @@ debug:
 	-device e1000,netdev=eth0
 
 clean:
-	test ! -d denx        || ( cd denx && make clean )
+	test ! -d denx || ( cd denx && make clean )
 
 install:
 
