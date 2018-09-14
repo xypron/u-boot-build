@@ -167,7 +167,7 @@ sata:
 	-device ide-drive,drive=Disk1,bus=ahci.0
 
 check:
-	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
+	qemu-system-i386 -enable-kvm -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
 	-netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5
