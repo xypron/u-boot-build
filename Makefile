@@ -13,6 +13,9 @@ export PATH
 PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
+LINES="${shell tput lines}"
+COLUMNS="${shell tput cols}"
+UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
 	undefine CROSS_COMPILE
@@ -95,21 +98,35 @@ unit-tests:
 
 sct-prepare:
 	mkdir -p mnt
-	fusermount -u mnt || true
+	sudo umount mnt || true
 	rm -f sct-i386.part1
-	/usr/sbin/mkfs.vfat -C sct-i386.part1 131071
-	fusefat sct-i386.part1 mnt -o rw+
+	/sbin/mkfs.vfat -C sct-i386.part1 131071
+	sudo mount sct-i386.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/MinUefiShell/Ia32/Shell.efi mnt/
+	echo setenv LINES $(LINES) > efi_shell.txt
+	echo setenv COLUMNS $(COLUMNS) >> efi_shell.txt
+	echo scsi scan >> efi_shell.txt
+	echo load scsi 0:1 \$${loadaddr} Shell.efi >> efi_shell.txt
+	echo bootefi \$${loadaddr} \$${fdtcontroladdr} >> efi_shell.txt
+	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
+	cp startup.nsh mnt/
 	test -f UEFI2.6SCTII_Final_Release.zip || \
 	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
-	unzip UEFI2.6SCTII_Final_Release.zip -d mnt
-	cd mnt && unzip UEFISCT.zip || true
+	rm -rf sct.tmp
+	mkdir sct.tmp
+	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
+	cd sct.tmp && unzip UEFISCT.zip
+	cp sct.tmp/UEFISCT/SctPackageIA32/IA32/* mnt -R
+	cd sct.tmp && unzip IHVSCT.zip
+	cp sct.tmp/IHVSCT/SctPackageIA32/IA32/* mnt -R
+	rm -rf sct.tmp
 	rm -f sct-i386.img
+	sudo umount mnt || true
 	dd if=/dev/zero of=sct-i386.img bs=1024 count=1 seek=1023
 	cat sct-i386.part1 >> sct-i386.img
 	rm sct-i386.part1
 	echo -e "image1: start= 2048, type=ef\n" | \
-	/usr/sbin/sfdisk sct-i386.img
+	/sbin/sfdisk sct-i386.img
 
 sct:
 	test -f sct-i386.img || \
@@ -118,7 +135,8 @@ sct:
 	-netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
-	-hda sct-i386.img
+	-drive if=none,file=sct-i386.img,id=mydisk -device ich9-ahci,id=ahci \
+	-device ide-drive,drive=mydisk,bus=ahci.0
 
 check:
 	qemu-system-i386 -enable-kvm -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
