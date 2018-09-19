@@ -7,8 +7,6 @@ REVISION=001
 
 MESON_TOOLS_TAG=v0.1
 
-LINES="${shell tput lines}"
-COLUMNS="${shell tput cols}"
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
@@ -91,8 +89,6 @@ sct-prepare:
 	/sbin/mkfs.vfat -C sct-arm64.part1 131071
 	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/MinUefiShell/AArch64/Shell.efi mnt/
-	echo setenv LINES $(LINES) > efi_shell.txt
-	echo setenv COLUMNS $(COLUMNS) >> efi_shell.txt
 	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
 	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
