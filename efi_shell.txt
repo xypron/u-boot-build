@@ -1,5 +1,0 @@
-setenv LINES 44
-setenv COLUMNS 172
-scsi scan
-load scsi 0:1 ${loadaddr} Shell.efi
-bootefi ${loadaddr} ${fdtcontroladdr}

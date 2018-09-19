@@ -13,8 +13,6 @@ export PATH
 PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
-LINES="${shell tput lines}"
-COLUMNS="${shell tput cols}"
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
@@ -103,8 +101,6 @@ sct-prepare:
 	/sbin/mkfs.vfat -C sct-i386.part1 131071
 	sudo mount sct-i386.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/MinUefiShell/Ia32/Shell.efi mnt/
-	echo setenv LINES $(LINES) > efi_shell.txt
-	echo setenv COLUMNS $(COLUMNS) >> efi_shell.txt
 	echo scsi scan >> efi_shell.txt
 	echo load scsi 0:1 \$${loadaddr} Shell.efi >> efi_shell.txt
 	echo bootefi \$${loadaddr} \$${fdtcontroladdr} >> efi_shell.txt
