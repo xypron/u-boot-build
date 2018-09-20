@@ -563,6 +563,7 @@ CONFIG_IDE=y
 #
 # CONFIG_CLK is not set
 CONFIG_CPU=y
+# CONFIG_CPU_MPC83XX is not set
 
 #
 # Hardware crypto devices
@@ -868,6 +869,7 @@ CONFIG_SYSRESET=y
 CONFIG_SYSRESET_X86=y
 # CONFIG_SYSRESET_SYSCON is not set
 # CONFIG_SYSRESET_WATCHDOG is not set
+# CONFIG_SYSRESET_MCP83XX is not set
 # CONFIG_DM_THERMAL is not set
 
 #
@@ -886,6 +888,7 @@ CONFIG_X86_TSC_TIMER=y
 # CONFIG_ATCPIT100_TIMER is not set
 # CONFIG_ROCKCHIP_TIMER is not set
 # CONFIG_STM32_TIMER is not set
+# CONFIG_MPC83XX_TIMER is not set
 
 #
 # TPM support
