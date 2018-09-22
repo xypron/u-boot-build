@@ -101,7 +101,7 @@ sct-prepare:
 	/sbin/mkfs.vfat -C sct-i386.part1 131071
 	sudo mount sct-i386.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/MinUefiShell/Ia32/Shell.efi mnt/
-	echo scsi scan >> efi_shell.txt
+	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${loadaddr} Shell.efi >> efi_shell.txt
 	echo bootefi \$${loadaddr} \$${fdtcontroladdr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
@@ -120,7 +120,7 @@ sct-prepare:
 	sudo umount mnt || true
 	dd if=/dev/zero of=sct-i386.img bs=1024 count=1 seek=1023
 	cat sct-i386.part1 >> sct-i386.img
-	rm sct-i386.part1
+	rm sct-i386.part1 efi_shell.txt
 	echo -e "image1: start= 2048, type=ef\n" | \
 	/sbin/sfdisk sct-i386.img
 
