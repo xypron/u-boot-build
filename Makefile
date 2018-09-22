@@ -94,7 +94,9 @@ build:
 check:
 	QEMU_AUDIO_DRV=none qemu-system-arm \
 	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
-	-net user -net nic,model=lan9118 \
+	-netdev \
+	user,id=net0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
+	-net nic,model=lan9118,netdev=net0 \
 	-m 1024M --nographic \
 	-drive if=sd,file=img.vexpress,media=disk,format=raw
 
@@ -104,7 +106,9 @@ check-gdb:
 	agent-proxy 4440^1234 localhost 2000 &
 	QEMU_AUDIO_DRV=none qemu-system-arm \
 	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
-	-net user -net nic,model=lan9118 \
+	-netdev \
+	user,id=net0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
+	-net nic,model=lan9118,netdev=net0 \
 	-m 1024M --nographic \
 	-drive if=sd,file=img.vexpress,media=disk,format=raw \
 	-chardev socket,id=char0,port=2000,host=localhost,ipv4,server \
