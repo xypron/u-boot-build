@@ -172,6 +172,7 @@ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
 #
 CONFIG_MENU=y
 # CONFIG_CONSOLE_RECORD is not set
+# CONFIG_DISABLE_CONSOLE is not set
 CONFIG_LOGLEVEL=4
 CONFIG_SPL_LOGLEVEL=4
 # CONFIG_SILENT_CONSOLE is not set
@@ -268,7 +269,6 @@ CONFIG_CMD_RUN=y
 CONFIG_CMD_IMI=y
 # CONFIG_CMD_IMLS is not set
 CONFIG_CMD_XIMG=y
-# CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_FITUPD is not set
 # CONFIG_CMD_THOR_DOWNLOAD is not set
 CONFIG_CMD_ZBOOT=y
@@ -340,6 +340,7 @@ CONFIG_CMD_NVME=y
 CONFIG_CMD_PART=y
 CONFIG_CMD_PCI=y
 # CONFIG_CMD_PCMCIA is not set
+# CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_READ is not set
 CONFIG_CMD_SATA=y
 # CONFIG_CMD_SAVES is not set
@@ -672,6 +673,7 @@ CONFIG_I8042_KEYB=y
 # CONFIG_WINBOND_W83627 is not set
 CONFIG_QFW=y
 CONFIG_ZYNQ_GEM_I2C_MAC_OFFSET=0x0
+# CONFIG_FS_LOADER is not set
 
 #
 # MMC Host controller Support
@@ -768,6 +770,7 @@ CONFIG_PCI_PNP=y
 # CONFIG_DM_REGULATOR is not set
 # CONFIG_DM_PWM is not set
 # CONFIG_PWM_SANDBOX is not set
+# CONFIG_U_QE is not set
 # CONFIG_RAM is not set
 
 #
@@ -1025,6 +1028,16 @@ CONFIG_CONSOLE_SCROLL_LINES=5
 # CONFIG_LCD is not set
 # CONFIG_VIDEO_SIMPLE is not set
 # CONFIG_VIDEO_DT_SIMPLEFB is not set
+
+#
+# 1-Wire support
+#
+# CONFIG_W1 is not set
+
+#
+# 1-wire EEPROM support
+#
+# CONFIG_W1_EEPROM is not set
 
 #
 # Watchdog Timer Support
