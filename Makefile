@@ -63,7 +63,7 @@ build:
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
-	cd denx && make -$(NPROC)
+	cd denx && make -j$(NPROC)
 
 clean:
 	cd denx && make distclean
