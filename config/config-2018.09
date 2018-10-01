@@ -627,6 +627,7 @@ CONFIG_BLOCK_CACHE=y
 # Demo for driver model
 #
 # CONFIG_DM_DEMO is not set
+# CONFIG_BOARD is not set
 
 #
 # DFU support
