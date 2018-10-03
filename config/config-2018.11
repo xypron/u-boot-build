@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.09 Configuration
+# U-Boot 2018.11-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -520,6 +520,7 @@ CONFIG_CMD_LOADS=y
 CONFIG_CMD_MMC=y
 # CONFIG_CMD_MMC_RPMB is not set
 # CONFIG_CMD_MMC_SWRITE is not set
+# CONFIG_CMD_MTD is not set
 # CONFIG_CMD_NAND is not set
 # CONFIG_CMD_MMC_SPI is not set
 # CONFIG_CMD_ONENAND is not set
@@ -754,6 +755,7 @@ CONFIG_SYS_FSL_SEC_LE=y
 # Demo for driver model
 #
 # CONFIG_DM_DEMO is not set
+# CONFIG_BOARD is not set
 
 #
 # DFU support
@@ -770,6 +772,7 @@ CONFIG_SYS_FSL_SEC_LE=y
 # Fastboot support
 #
 # CONFIG_UDP_FUNCTION_FASTBOOT is not set
+# CONFIG_FIRMWARE is not set
 
 #
 # FPGA support
@@ -865,10 +868,10 @@ CONFIG_FSL_ESDHC=y
 #
 # MTD Support
 #
+# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_MTD is not set
 # CONFIG_MTD_NOR_FLASH is not set
 # CONFIG_MTD_DEVICE is not set
-# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_NAND is not set
 
 #
