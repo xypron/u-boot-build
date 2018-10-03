@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.09 Configuration
+# U-Boot 2018.11-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -223,6 +223,7 @@ CONFIG_BOOTCOMMAND="run distro_bootcmd; run bootflash"
 #
 CONFIG_MENU=y
 # CONFIG_CONSOLE_RECORD is not set
+# CONFIG_DISABLE_CONSOLE is not set
 CONFIG_LOGLEVEL=4
 CONFIG_SPL_LOGLEVEL=4
 # CONFIG_SILENT_CONSOLE is not set
@@ -242,6 +243,7 @@ CONFIG_SUPPORT_RAW_INITRD=y
 CONFIG_DEFAULT_FDT_FILE="vexpress-v2p-ca15_a7.dtb"
 # CONFIG_MISC_INIT_R is not set
 # CONFIG_VERSION_VARIABLE is not set
+# CONFIG_BOARD_LATE_INIT is not set
 # CONFIG_DISPLAY_CPUINFO is not set
 # CONFIG_DISPLAY_BOARDINFO is not set
 # CONFIG_DISPLAY_BOARDINFO_LATE is not set
@@ -316,7 +318,6 @@ CONFIG_CMD_RUN=y
 CONFIG_CMD_IMI=y
 # CONFIG_CMD_IMLS is not set
 # CONFIG_CMD_XIMG is not set
-# CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_FITUPD is not set
 # CONFIG_CMD_THOR_DOWNLOAD is not set
 # CONFIG_CMD_ZBOOT is not set
@@ -380,12 +381,15 @@ CONFIG_CMD_FLASH=y
 CONFIG_CMD_MMC=y
 # CONFIG_CMD_MMC_RPMB is not set
 # CONFIG_CMD_MMC_SWRITE is not set
+# CONFIG_CMD_MTD is not set
 # CONFIG_CMD_NAND is not set
 # CONFIG_CMD_MMC_SPI is not set
 # CONFIG_CMD_ONENAND is not set
+# CONFIG_CMD_OSD is not set
 CONFIG_CMD_PART=y
 # CONFIG_CMD_PCI is not set
 # CONFIG_CMD_PCMCIA is not set
+# CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_READ is not set
 # CONFIG_CMD_SATA is not set
 # CONFIG_CMD_SAVES is not set
@@ -593,6 +597,7 @@ CONFIG_HAVE_BLOCK_DEVICE=y
 #
 # Demo for driver model
 #
+# CONFIG_BOARD is not set
 
 #
 # DFU support
@@ -607,6 +612,7 @@ CONFIG_HAVE_BLOCK_DEVICE=y
 # Fastboot support
 #
 # CONFIG_UDP_FUNCTION_FASTBOOT is not set
+# CONFIG_FIRMWARE is not set
 
 #
 # FPGA support
@@ -658,6 +664,7 @@ CONFIG_HAVE_BLOCK_DEVICE=y
 # CONFIG_TWL4030_LED is not set
 # CONFIG_WINBOND_W83627 is not set
 CONFIG_ZYNQ_GEM_I2C_MAC_OFFSET=0x0
+# CONFIG_FS_LOADER is not set
 
 #
 # MMC Host controller Support
@@ -688,9 +695,9 @@ CONFIG_MMC_VERBOSE=y
 #
 # MTD Support
 #
+# CONFIG_MTD_PARTITIONS is not set
 CONFIG_MTD_NOR_FLASH=y
 # CONFIG_MTD_DEVICE is not set
-# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_NAND is not set
 
 #
@@ -749,6 +756,7 @@ CONFIG_SMC911X_32_BIT=y
 # CONFIG_PMIC_AS3722 is not set
 # CONFIG_POWER_MC34VR500 is not set
 # CONFIG_PWM_SANDBOX is not set
+# CONFIG_U_QE is not set
 
 #
 # Remote Processor drivers
@@ -761,6 +769,7 @@ CONFIG_SMC911X_32_BIT=y
 #
 # Real Time Clock
 #
+# CONFIG_RTC_PL031 is not set
 # CONFIG_RTC_S35392A is not set
 # CONFIG_SCSI is not set
 
@@ -826,6 +835,14 @@ CONFIG_PL011_SERIAL=y
 # CONFIG_LCD is not set
 # CONFIG_VIDEO_SIMPLE is not set
 # CONFIG_VIDEO_DT_SIMPLEFB is not set
+
+#
+# 1-Wire support
+#
+
+#
+# 1-wire EEPROM support
+#
 
 #
 # Watchdog Timer Support
