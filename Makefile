@@ -1,7 +1,7 @@
 # Build U-Boot for QEMU arm
 .POSIX:
 
-TAG=2018.09
+TAG=2018.11
 TAGPREFIX=v
 REVISION=001
 

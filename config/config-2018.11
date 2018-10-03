@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.09 Configuration
+# U-Boot 2018.11-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -384,6 +384,7 @@ CONFIG_CMD_FLASH=y
 CONFIG_CMD_LOADB=y
 CONFIG_CMD_LOADS=y
 # CONFIG_CMD_MMC is not set
+# CONFIG_CMD_MTD is not set
 # CONFIG_CMD_NAND is not set
 CONFIG_CMD_NVME=y
 # CONFIG_CMD_MMC_SPI is not set
@@ -721,10 +722,10 @@ CONFIG_ZYNQ_GEM_I2C_MAC_OFFSET=0x0
 #
 # MTD Support
 #
+# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_MTD is not set
 # CONFIG_MTD_NOR_FLASH is not set
 # CONFIG_MTD_DEVICE is not set
-# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_NAND is not set
 
 #
@@ -994,7 +995,7 @@ CONFIG_USB_EHCI_PCI=y
 CONFIG_FS_EXT4=y
 # CONFIG_EXT4_WRITE is not set
 CONFIG_FS_FAT=y
-# CONFIG_FAT_WRITE is not set
+CONFIG_FAT_WRITE=y
 CONFIG_FS_FAT_MAX_CLUSTSIZE=65536
 # CONFIG_FS_JFFS2 is not set
 # CONFIG_UBIFS_SILENCE_MSG is not set
