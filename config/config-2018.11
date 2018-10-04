@@ -333,6 +333,7 @@ CONFIG_CMD_IO=y
 CONFIG_CMD_LOADB=y
 CONFIG_CMD_LOADS=y
 # CONFIG_CMD_MMC is not set
+# CONFIG_CMD_MTD is not set
 # CONFIG_CMD_NAND is not set
 CONFIG_CMD_NVME=y
 # CONFIG_CMD_MMC_SPI is not set
@@ -689,10 +690,10 @@ CONFIG_DM_MMC=y
 #
 # MTD Support
 #
+# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_MTD is not set
 # CONFIG_MTD_NOR_FLASH is not set
 # CONFIG_MTD_DEVICE is not set
-# CONFIG_MTD_PARTITIONS is not set
 # CONFIG_NAND is not set
 
 #
@@ -833,6 +834,7 @@ CONFIG_SYS_NS16550=y
 # CONFIG_SOUND is not set
 CONFIG_SPI=y
 CONFIG_DM_SPI=y
+# CONFIG_SPI_MEM is not set
 # CONFIG_ALTERA_SPI is not set
 # CONFIG_ATCSPI200_SPI is not set
 # CONFIG_ATMEL_SPI is not set
