@@ -41,6 +41,8 @@ prepare:
 	cd meson-tools && git fetch
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
+	test -d ipxe || git clone -v \
+	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
