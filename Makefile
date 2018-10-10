@@ -1,7 +1,7 @@
 # Build U-Boot for Odroid C2
 .POSIX:
 
-TAG=2018.09
+TAG=2018.11
 TAGPREFIX=v
 REVISION=001
 
