@@ -890,7 +890,7 @@ CONFIG_PCI_PNP=y
 # Real Time Clock
 #
 CONFIG_DM_RTC=y
-# CONFIG_SPL_DM_RTC is not set
+CONFIG_SPL_DM_RTC=y
 # CONFIG_RTC_PCF2127 is not set
 # CONFIG_RTC_DS1307 is not set
 # CONFIG_RTC_ISL1208 is not set
