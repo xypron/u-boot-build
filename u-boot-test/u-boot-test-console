@@ -1,0 +1,6 @@
+#!/bin/sh
+touch /tmp/u-boot-monitor-socket
+qemu-system-x86_64 -bios u-boot.rom -cpu core2duo -nographic \
+-netdev user,id=eth0,tftp=../tftp \
+-device e1000,netdev=eth0 -machine pc-i440fx-2.8 \
+-monitor unix:/tmp/u-boot-monitor-socket,server,nowait
