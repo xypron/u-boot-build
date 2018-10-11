@@ -136,10 +136,17 @@ check:
 	-device ide-drive,drive=mydisk,bus=ahci.0
 
 check-el3:
+	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a57,has_el3=true -bios denx/u-boot.bin -nographic -netdev \
-	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
-	-device e1000,netdev=eth0
+	-cpu cortex-a57 -m 1G -smp cores= 2 -bios denx/u-boot.bin -nographic \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
+	test ! -f arm64.img || \
+	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
+	-cpu cortex-a57 -m 1G -smp cores=2 -bios denx/u-boot.bin -nographic \
+	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
+	-device e1000,netdev=eth0 \
+	-drive if=none,file=arm64.img,id=mydisk -device ich9-ahci,id=ahci \
+	-device ide-drive,drive=mydisk,bus=ahci.0
 
 debug:
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
