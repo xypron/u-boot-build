@@ -109,7 +109,7 @@ sct-prepare:
 	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
 	cat sct-arm64.part1 >> sct-arm64.img
 	rm sct-arm64.part1 efi_shell.txt
-	echo -e "image1: start= 2048, type=ef\n" | \
+	echo -e "image1: start=2048, type=ef\n" | \
 	/sbin/sfdisk sct-arm64.img
 
 sct:
@@ -124,7 +124,7 @@ sct:
 
 check:
 	test -f arm64.img || \
-	qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1G -smp cores= 2 \
+	qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 	test ! -f arm64.img || \
@@ -138,7 +138,7 @@ check:
 check-el3:
 	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a57 -m 1G -smp cores= 2 -bios denx/u-boot.bin -nographic \
+	-cpu cortex-a57 -m 1G -smp cores=2 -bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 	test ! -f arm64.img || \
 	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
