@@ -71,6 +71,9 @@ build:
 check:
 	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
 	-cpu core2duo -gdb tcp::1234
+check-s:
+	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
+	-cpu core2duo -gdb tcp::1234 -S
 
 clean:
 	cd denx && make distclean
