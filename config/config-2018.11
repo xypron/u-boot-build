@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.11-rc1 Configuration
+# U-Boot 2018.11-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -98,6 +98,7 @@ CONFIG_ARCH_QEMU=y
 # CONFIG_ARCH_SNAPDRAGON is not set
 # CONFIG_ARCH_SOCFPGA is not set
 # CONFIG_ARCH_SUNXI is not set
+# CONFIG_ARCH_VERSAL is not set
 # CONFIG_ARCH_VF610 is not set
 # CONFIG_ARCH_ZYNQ is not set
 # CONFIG_ARCH_ZYNQMP_R5 is not set
@@ -514,7 +515,6 @@ CONFIG_MTDPARTS_DEFAULT=""
 #
 # CONFIG_CMD_BEDBUG is not set
 # CONFIG_CMD_DIAG is not set
-# CONFIG_CMD_KGDB is not set
 # CONFIG_CMD_LOG is not set
 # CONFIG_CMD_TRACE is not set
 # CONFIG_CMD_UBI is not set
