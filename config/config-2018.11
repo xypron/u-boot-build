@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.11-rc1 Configuration
+# U-Boot 2018.11-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -53,6 +53,7 @@ CONFIG_SMBIOS_PRODUCT_NAME="qemu-x86"
 # CONFIG_DEBUG_UART is not set
 CONFIG_QEMU=y
 CONFIG_ACPI_PM1_BASE=0xe400
+CONFIG_X86_TSC_TIMER_EARLY_FREQ=1000
 CONFIG_CPU_ADDR_BITS=36
 CONFIG_AHCI=y
 CONFIG_RAMBASE=0x100000
@@ -457,7 +458,6 @@ CONFIG_CMD_FS_GENERIC=y
 # CONFIG_CMD_BEDBUG is not set
 # CONFIG_CMD_DIAG is not set
 CONFIG_CMD_IRQ=y
-# CONFIG_CMD_KGDB is not set
 # CONFIG_CMD_LOG is not set
 # CONFIG_CMD_TRACE is not set
 # CONFIG_CMD_UBI is not set
@@ -695,6 +695,7 @@ CONFIG_DM_MMC=y
 # CONFIG_MTD is not set
 # CONFIG_MTD_NOR_FLASH is not set
 # CONFIG_MTD_DEVICE is not set
+# CONFIG_FLASH_CFI_DRIVER is not set
 # CONFIG_NAND is not set
 
 #
