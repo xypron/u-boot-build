@@ -131,7 +131,8 @@ sct:
 	-netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
-	-drive if=none,file=sct-i386.img,id=mydisk -device ich9-ahci,id=ahci \
+	-drive if=none,file=sct-i386.img,id=mydisk,format=raw \
+	-device ich9-ahci,id=ahci \
 	-device ide-drive,drive=mydisk,bus=ahci.0
 
 check:
