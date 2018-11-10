@@ -1,7 +1,7 @@
 # Build U-Boot for x86
 .POSIX:
 
-TAG=2018.09
+TAG=2018.11
 TAGPREFIX=v
 REVISION=001
 
@@ -49,7 +49,7 @@ prepare:
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
-	cd patch && (git checkout sandbox)
+	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
@@ -62,7 +62,7 @@ build:
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
-	cd denx && ../patch/patch-sandbox.sh
+	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
