@@ -1,0 +1,4 @@
+[submodule "patch"]
+	path = patch
+	url = https://github.com/xypron/u-boot-patches.git
+	branch = efi-next
