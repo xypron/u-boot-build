@@ -64,11 +64,15 @@ build:
 
 check:
 	qemu-system-riscv64 -machine virt -m 1G \
-	-kernel denx/u-boot -nographic
+	-kernel denx/u-boot -nographic \
+	-device virtio-net-device,netdev=usernet \
+	-netdev user,id=usernet
 
 debug:
 	qemu-system-riscv64 -machine virt \
-	-kernel denx/u-boot -nographic -gdb tcp::1234
+	-kernel denx/u-boot -nographic -gdb tcp::1234 \
+	-device virtio-net-device,netdev=usernet \
+	-netdev user,id=usernet
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
