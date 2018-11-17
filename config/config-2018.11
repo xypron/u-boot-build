@@ -267,6 +267,7 @@ CONFIG_CMD_LOADS=y
 # CONFIG_CMD_PART is not set
 # CONFIG_CMD_PCI is not set
 # CONFIG_CMD_PCMCIA is not set
+# CONFIG_CMD_PINMUX is not set
 # CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_READ is not set
 # CONFIG_CMD_SATA is not set
