@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2018.11 Configuration
+# U-Boot 2019.01-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -80,6 +80,7 @@ CONFIG_ARM64_SUPPORT_AARCH32=y
 # CONFIG_ARCH_K3 is not set
 # CONFIG_ARCH_OMAP2PLUS is not set
 # CONFIG_ARCH_MESON is not set
+# CONFIG_ARCH_MEDIATEK is not set
 # CONFIG_ARCH_LPC32XX is not set
 # CONFIG_ARCH_IMX8 is not set
 # CONFIG_ARCH_MX8M is not set
@@ -234,6 +235,7 @@ CONFIG_MENU=y
 # CONFIG_DISABLE_CONSOLE is not set
 CONFIG_LOGLEVEL=4
 CONFIG_SPL_LOGLEVEL=4
+CONFIG_TPL_LOGLEVEL=4
 # CONFIG_SILENT_CONSOLE is not set
 # CONFIG_PRE_CONSOLE_BUFFER is not set
 # CONFIG_CONSOLE_MUX is not set
@@ -247,7 +249,6 @@ CONFIG_SPL_LOGLEVEL=4
 # Logging
 #
 # CONFIG_LOG is not set
-# CONFIG_SPL_LOG is not set
 CONFIG_SUPPORT_RAW_INITRD=y
 CONFIG_DEFAULT_FDT_FILE=""
 # CONFIG_MISC_INIT_R is not set
@@ -274,6 +275,11 @@ CONFIG_HASH=y
 #
 # Update support
 #
+
+#
+# Blob list
+#
+# CONFIG_BLOBLIST is not set
 
 #
 # SPL / TPL
@@ -402,7 +408,7 @@ CONFIG_CMD_PART=y
 CONFIG_CMD_PCI=y
 # CONFIG_CMD_PCMCIA is not set
 # CONFIG_CMD_PINMUX is not set
-CONFIG_CMD_POWEROFF=y
+# CONFIG_CMD_POWEROFF is not set
 # CONFIG_CMD_READ is not set
 # CONFIG_CMD_SATA is not set
 # CONFIG_CMD_SAVES is not set
@@ -678,6 +684,11 @@ CONFIG_ARM_PSCI_FW=y
 # CONFIG_VYBRID_GPIO is not set
 
 #
+# Hardware Spinlock Support
+#
+# CONFIG_DM_HWSPINLOCK is not set
+
+#
 # I2C support
 #
 # CONFIG_DM_I2C is not set
@@ -837,11 +848,13 @@ CONFIG_DM_RTC=y
 # CONFIG_RTC_PCF2127 is not set
 # CONFIG_RTC_DS1307 is not set
 # CONFIG_RTC_ISL1208 is not set
+# CONFIG_RTC_RV3029 is not set
 # CONFIG_RTC_RX8010SJ is not set
 CONFIG_RTC_PL031=y
 # CONFIG_RTC_MV is not set
 # CONFIG_RTC_S35392A is not set
 # CONFIG_RTC_MC146818 is not set
+# CONFIG_RTC_M41T62 is not set
 CONFIG_SCSI=y
 CONFIG_DM_SCSI=y
 
@@ -863,6 +876,7 @@ CONFIG_DM_SERIAL=y
 # CONFIG_ALTERA_UART is not set
 # CONFIG_ARC_SERIAL is not set
 # CONFIG_ATMEL_USART is not set
+# CONFIG_BCM6345_SERIAL is not set
 # CONFIG_FSL_LINFLEXUART is not set
 # CONFIG_FSL_LPUART is not set
 # CONFIG_MVEBU_A3700_UART is not set
@@ -872,6 +886,7 @@ CONFIG_PL01X_SERIAL=y
 # CONFIG_MSM_SERIAL is not set
 # CONFIG_OMAP_SERIAL is not set
 # CONFIG_PXA_SERIAL is not set
+# CONFIG_MTK_SERIAL is not set
 # CONFIG_SMEM is not set
 
 #
@@ -908,6 +923,7 @@ CONFIG_SYSRESET_PSCI=y
 #
 CONFIG_USB=y
 CONFIG_DM_USB=y
+CONFIG_SPL_DM_USB=y
 
 #
 # USB Host Controller Drivers
@@ -1071,6 +1087,7 @@ CONFIG_REGEX=y
 # CONFIG_LZ4 is not set
 CONFIG_LZMA=y
 # CONFIG_LZO is not set
+# CONFIG_SPL_LZ4 is not set
 # CONFIG_SPL_LZO is not set
 # CONFIG_SPL_GZIP is not set
 # CONFIG_ERRNO_STR is not set
