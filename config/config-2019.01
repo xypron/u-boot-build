@@ -892,6 +892,7 @@ CONFIG_PL01X_SERIAL=y
 # CONFIG_MSM_SERIAL is not set
 # CONFIG_OMAP_SERIAL is not set
 # CONFIG_PXA_SERIAL is not set
+# CONFIG_SIFIVE_SERIAL is not set
 # CONFIG_MTK_SERIAL is not set
 # CONFIG_SMEM is not set
 
