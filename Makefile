@@ -49,7 +49,7 @@ prepare:
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
-	cd patch && (git checkout x86_64)
+	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
 	cd denx && (git fetch origin || true)
 	cd denx && (git fetch agraf || true)
@@ -62,14 +62,14 @@ build:
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
-	cd denx && ../patch/patch-x86_64.sh
+	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
 	cd denx && make -j$(NPROC)
 
 check:
-	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
+	qemu-system-x86_64 -enable-kvm -bios denx/u-boot.rom -nographic \
 	-cpu core2duo -gdb tcp::1234
 check-s:
 	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
