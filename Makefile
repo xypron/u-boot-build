@@ -1,7 +1,7 @@
 # Build U-Boot for the Tinker Board
 .POSIX:
 
-TAG=2018.05
+TAG=2018.09
 TAGPREFIX=v
 REVISION=001
 
