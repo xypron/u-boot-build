@@ -1,7 +1,7 @@
 # Build U-Boot for x86
 .POSIX:
 
-TAG=2018.11
+TAG=2019.01
 TAGPREFIX=v
 REVISION=001
 
@@ -16,6 +16,8 @@ export PYTHONPATH
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
+	undefine CROSS_COMPILE
+else ifeq ("i686", $(MK_ARCH))
 	undefine CROSS_COMPILE
 else
 	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
