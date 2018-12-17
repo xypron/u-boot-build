@@ -21,7 +21,7 @@ else
 endif
 undefine MK_ARCH
 
-export LOCALVERSION:=-D$(REVISION)
+export LOCALVERSION:=-R$(REVISION)
 export BUILD_ROM=y
 
 all:
