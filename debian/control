@@ -1,0 +1,15 @@
+Source: tinker-board-u-boot
+Section: kernel
+Priority: optional
+Maintainer: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Build-Depends: bc, ca-certificates, debhelper, device-tree-compiler, dirmngr,
+ git, gnupg, libncurses5-dev, libssl-dev
+Standards-Version: 3.9.4.0
+Homepage: https://www.kernel.org/
+
+Package: tinker-board-u-boot-image
+Architecture: armhf
+Section: debian-installer
+Priority: standard
+Description: U-boot image for Tinker Board
+ This package contains the u-boot image for the Tinker Board.

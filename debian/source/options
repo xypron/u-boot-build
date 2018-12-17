@@ -1,0 +1,15 @@
+# ignore kernel source
+tar-ignore = "denx*"
+tar-ignore = "foo*"
+tar-ignore = "ipxe*"
+tar-ignore = "hardkernel*"
+tar-ignore = "meson-tools*"
+tar-ignore = "tftp*"
+tar-ignore = "patch*"
+# ignore git related files
+tar-ignore = ".git*"
+# ignore log file
+tar-ignore = "job.log"
+# ignore last build
+tar-ignore = "debian/tinker-board-u-boot-image"
+tar-ignore = "u-boot.bin"

@@ -1,5 +1,8 @@
-*.pyc
 job.log
+foo/
 denx/
 hardkernel/
+ipxe/
 meson-tools/
+tftp/
+u-boot.bin
