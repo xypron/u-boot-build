@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.01-rc1 Configuration
+# U-Boot 2019.01-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -572,6 +572,7 @@ CONFIG_CMD_BLOCK_CACHE=y
 CONFIG_CMD_CACHE=y
 CONFIG_CMD_CONITRACE=y
 # CONFIG_CMD_DISPLAY is not set
+CONFIG_CMD_EXCEPTION=y
 # CONFIG_CMD_LED is not set
 # CONFIG_CMD_DATE is not set
 CONFIG_CMD_TIME=y
@@ -1254,7 +1255,6 @@ CONFIG_USB_DWC2_BUFFER_SIZE=64
 #
 # CONFIG_USB_MUSB_HCD is not set
 # CONFIG_USB_MUSB_UDC is not set
-# CONFIG_USB_DAVINCI is not set
 
 #
 # MUSB Controller Driver
