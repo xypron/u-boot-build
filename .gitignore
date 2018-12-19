@@ -1,0 +1,5 @@
+*.pyc
+job.log
+denx/
+hardkernel/
+meson-tools/
