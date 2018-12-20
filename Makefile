@@ -16,6 +16,7 @@ undefine MK_ARCH
 
 export LOCALVERSION:=-D$(REVISION)
 
+export DEVICE_TREE=armada-8040-mcbin
 export BL33=$(CURDIR)/denx/u-boot.bin
 export SCP_BL2=$(CURDIR)/binaries-marvell/mrvl_scp_bl2_mss_ap_cp1_a8040.img
 
