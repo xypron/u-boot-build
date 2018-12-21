@@ -5,6 +5,8 @@ TAG=2019.01
 TAGPREFIX=v
 REVISION=001
 
+NPROC=${shell nproc}
+
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
@@ -68,7 +70,7 @@ build:
 	cd denx && make distclean
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
-	cd denx && make -j6
+	cd denx && make -j$(NPROC)
 
 atf:
 	cd patch && (git fetch origin || true)
