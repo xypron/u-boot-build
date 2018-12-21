@@ -5,6 +5,8 @@ TAG=2018.09
 TAGPREFIX=v
 REVISION=001
 
+NPROC=${shell nproc}
+
 MESON_TOOLS_TAG=v0.1
 
 MK_ARCH="${shell uname -m}"
@@ -58,7 +60,7 @@ build:
 	cd denx && make distclean
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
-	cd denx && make -j6
+	cd denx && make -j$(NPROC)
 
 fip_create:
 	cd hardkernel && git fetch
