@@ -5,7 +5,7 @@ TAG=2019.01
 TAGPREFIX=v
 REVISION=001
 
-MESON_TOOLS_TAG=v0.1
+NPROC=${shell nproc}
 
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
@@ -80,7 +80,7 @@ build:
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
-	cd denx && make -j6
+	cd denx && make -j$(NPROC)
 
 check:
 	test -f arm32.img || \
