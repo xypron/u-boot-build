@@ -92,7 +92,6 @@ atf:
 	cd atf-marvell && make USE_COHERENT_MEM=0 LOG_LEVEL=20 \
 	MV_DDR_PATH=../mv-ddr PLAT=a80x0_mcbin all fip
 
-
 clean:
 	test ! -d denx || ( cd denx && make clean )
 
@@ -101,7 +100,5 @@ install:
 	cp atf-marvell/build/a80x0_mcbin/release/flash-image.bin \
 	$(DESTDIR)/usr/lib/u-boot/macchiatobin/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/macchiatobin/
-
-uninstall:
 
 uninstall:
