@@ -138,11 +138,11 @@ check:
 check-el3:
 	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a57 -m 1G -smp cores=2 -bios denx/u-boot.bin -nographic \
+	-cpu cortex-a57 -m 1G -bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 	test ! -f arm64.img || \
 	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a57 -m 1G -smp cores=2 -bios denx/u-boot.bin -nographic \
+	-cpu cortex-a57 -m 1G -bios denx/u-boot.bin -nographic \
 	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
