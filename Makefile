@@ -1,7 +1,7 @@
 # Build U-Boot for Versatile Express V2P-CA15-CA7 (TC2)
 .POSIX:
 
-TAG=2018.11
+TAG=2019.01
 TAGPREFIX=v
 REVISION=001
 
