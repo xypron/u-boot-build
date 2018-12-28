@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.01-rc1 Configuration
+# U-Boot 2019.01-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -978,6 +978,7 @@ CONFIG_DEBUG_UART_MESON=y
 # CONFIG_DEBUG_UART_ZYNQ is not set
 # CONFIG_DEBUG_UART_PL010 is not set
 # CONFIG_DEBUG_UART_PL011 is not set
+# CONFIG_DEBUG_UART_SIFIVE is not set
 # CONFIG_DEBUG_UART_OMAP is not set
 CONFIG_DEBUG_UART_SHIFT=0
 CONFIG_DEBUG_UART_ANNOUNCE=y
@@ -997,6 +998,7 @@ CONFIG_MESON_SERIAL=y
 # CONFIG_MSM_SERIAL is not set
 # CONFIG_OMAP_SERIAL is not set
 # CONFIG_PXA_SERIAL is not set
+# CONFIG_SIFIVE_SERIAL is not set
 # CONFIG_MTK_SERIAL is not set
 # CONFIG_SMEM is not set
 
