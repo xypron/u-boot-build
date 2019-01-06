@@ -1,4 +1,4 @@
-# Build U-Boot for x86
+# Build U-Boot for sandbox
 .POSIX:
 
 TAG=2019.01
