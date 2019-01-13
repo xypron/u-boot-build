@@ -1,7 +1,7 @@
 # Build U-Boot for BananaPi
 .POSIX:
 
-TAG=2018.09
+TAG=2019.01
 TAGPREFIX=v
 REVISION=001
 
@@ -29,7 +29,8 @@ all:
 	which gmake && gmake build || make build
 
 prepare:
-	test -d patch || git submodule update
+	test -d patch/.git || \
+	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	http://git.denx.de/u-boot.git denx
 	cd denx && (git fetch origin || true)
