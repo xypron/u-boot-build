@@ -7,6 +7,8 @@ REVISION=001
 
 MESON_TOOLS_TAG=v0.1
 
+NPROC=${shell nproc}
+
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
 	undefine CROSS_COMPILE
@@ -61,7 +63,7 @@ build-ipxe:
 	mkdir -p ipxe/src/config/local/
 	cp config/*.h ipxe/src/config/local/
 	cp config/*.ipxe ipxe/src/config/local/
-	cd ipxe/src && make bin-arm64-efi/snp.efi -j$(NPROC) \
+	cd ipxe/src && make bin-arm64-efi/snp.efi -j $(NPROC) \
 	EMBED=config/local/chain.ipxe
 	cp ipxe/src/bin-arm64-efi/snp.efi tftp
 
@@ -94,7 +96,7 @@ build:
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
-	cd denx && make -j6
+	cd denx && make -j $(NPROC)
 
 fip_create:
 	cd hardkernel && git fetch
