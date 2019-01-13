@@ -2,4 +2,6 @@
 job.log
 denx/
 hardkernel/
+ipxe/
 meson-tools/
+tftp/
