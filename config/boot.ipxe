@@ -1,0 +1,27 @@
+#!ipxe
+echo iPXE script started
+set username USER
+set password PASSWORD
+dhcp
+route
+
+:menu
+menu Please, choose an application to run
+item --gap -- --- Operating systems ---
+item --key 1 grubaa64  1 grubaa64
+item --gap -- --------- Others --------
+item --key s cancel    s iPXE shell
+choose --default grubaa64 --timeout 2000 selected || goto cancel
+goto ${selected}
+
+:grubaa64
+sanhook --drive 0x81 --no-describe iscsi:192.168.0.1:::1:iqn.2000-01.de.xypron:disk1
+sanboot --drive 0x81 --no-describe --filename \EFI\debian\grubaa64.efi
+sanunhook --drive 0x81
+prompt Press any key to continue
+goto menu
+
+:cancel
+echo Opening shell
+shell
+goto menu
