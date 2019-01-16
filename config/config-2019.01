@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.01-rc2 Configuration
+# U-Boot 2019.01 Configuration
 #
 # CONFIG_ARC is not set
 # CONFIG_ARM is not set
@@ -662,6 +662,7 @@ CONFIG_DM_I2C_GPIO=y
 # CONFIG_SYS_I2C_ROCKCHIP is not set
 CONFIG_SYS_I2C_SANDBOX=y
 # CONFIG_SYS_I2C_MVTWSI is not set
+# CONFIG_SYS_I2C_XILINX_XIIC is not set
 # CONFIG_SYS_I2C_IHS is not set
 CONFIG_I2C_MUX=y
 CONFIG_SPL_I2C_MUX=y
@@ -829,6 +830,7 @@ CONFIG_ETH_SANDBOX_RAW=y
 # CONFIG_DRIVER_TI_EMAC is not set
 # CONFIG_DRIVER_TI_KEYSTONE_NET is not set
 # CONFIG_TSEC_ENET is not set
+# CONFIG_MEDIATEK_ETH is not set
 CONFIG_NVME=y
 CONFIG_PCI=y
 CONFIG_DM_PCI=y
