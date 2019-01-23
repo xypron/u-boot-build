@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.01-rc2 Configuration
+# U-Boot 2019.01 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -200,6 +200,7 @@ CONFIG_DEFAULT_FDT_FILE=""
 CONFIG_DISPLAY_CPUINFO=y
 # CONFIG_DISPLAY_BOARDINFO is not set
 CONFIG_DISPLAY_BOARDINFO_LATE=y
+# CONFIG_BOUNCE_BUFFER is not set
 
 #
 # Start-up hooks
@@ -759,6 +760,7 @@ CONFIG_E1000=y
 # CONFIG_DRIVER_TI_EMAC is not set
 # CONFIG_DRIVER_TI_KEYSTONE_NET is not set
 # CONFIG_TSEC_ENET is not set
+# CONFIG_MEDIATEK_ETH is not set
 CONFIG_NVME=y
 CONFIG_PCI=y
 CONFIG_DM_PCI=y
@@ -837,7 +839,6 @@ CONFIG_DM_SERIAL=y
 # CONFIG_SERIAL_RX_BUFFER is not set
 # CONFIG_SERIAL_SEARCH_ALL is not set
 # CONFIG_TPL_DM_SERIAL is not set
-# CONFIG_DEBUG_UART_SKIP_INIT is not set
 # CONFIG_ALTERA_JTAG_UART is not set
 # CONFIG_ALTERA_UART is not set
 # CONFIG_ARC_SERIAL is not set
