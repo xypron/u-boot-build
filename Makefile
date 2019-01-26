@@ -70,10 +70,12 @@ build:
 
 check:
 	qemu-system-x86_64 -enable-kvm -bios denx/u-boot.rom -nographic \
-	-cpu core2duo -gdb tcp::1234
+	-cpu core2duo -gdb tcp::1234 \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 check-s:
 	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
-	-cpu core2duo -gdb tcp::1234 -S
+	-cpu core2duo -gdb tcp::1234 -S \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 
 clean:
 	cd denx && make distclean
