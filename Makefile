@@ -93,7 +93,7 @@ build:
 
 check:
 	QEMU_AUDIO_DRV=none qemu-system-arm \
-	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
+	-M vexpress-a9 -cpu cortex-a9 -kernel denx/u-boot \
 	-netdev user,id=net0,tftp=tftp -net nic,model=lan9118,netdev=net0 \
 	-m 1024M --nographic -gdb tcp::1234 \
 	-drive if=sd,file=img.vexpress,media=disk,format=raw
@@ -103,7 +103,7 @@ check-gdb:
 	pkill agent-proxy || true
 	agent-proxy 4440^1234 localhost 2000 &
 	QEMU_AUDIO_DRV=none qemu-system-arm \
-	-M vexpress-a15 -cpu cortex-a15 -kernel denx/u-boot \
+	-M vexpress-a9 -cpu cortex-a9 -kernel denx/u-boot \
 	-netdev user,id=net0,tftp=tftp -net nic,model=lan9118,netdev=net0 \
 	-m 1024M --nographic \
 	-drive if=sd,file=img.vexpress,media=disk,format=raw \
