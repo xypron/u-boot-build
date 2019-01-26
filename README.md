@@ -15,25 +15,25 @@ Where there a two branches for a platform the branch with '-dev' ending is used
 to build against the current U-Boot efi-next branch while the other builds
 against a release.
 
-* bananapi - Banana Pi
+* bananapi - Banana Pi release
 * bananapi-dev - Banana Pi development
 * firefly-rk3399 - Firefly RK3399
 * firefly-rk3399-rkloader - Firefly RK3399
 * macchiatobin - MACCHIATObin
-* macchiatobin-dev - MACCHIATObin
-* master
-* odroid-c2 - Odroid C2
-* odroid-c2-dev - Odroid C2
-* qemu-arm
-* qemu-arm64
-* qemu-riscv64
-* qemu-x86
-* qemu-x86\_64
-* sandbox
-* tinker - Asus Tinker Board
-* tinker-dev - Asus Tinker Board
-* vexpress\_ca15\_tc2-dev
-* vexpress\_ca9x4
+* macchiatobin-dev - MACCHIATObin development
+* master - documentation only
+* odroid-c2 - Odroid C2 release
+* odroid-c2-dev - Odroid C2 development
+* qemu-arm - QEMU target
+* qemu-arm64 - QEMU target
+* qemu-riscv64 - QEMU target
+* qemu-x86 - QEMU target
+* qemu-x86\_64 - QEMU target
+* sandbox - testing target
+* tinker - Asus Tinker Board release
+* tinker-dev - Asus Tinker Board development
+* vexpress\_ca15\_tc2-dev - QEMU target
+* vexpress\_ca9x4 - QEMU target
 
 Usage
 -----
