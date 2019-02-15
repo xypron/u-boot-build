@@ -88,7 +88,7 @@ sct-prepare:
 	rm -f sct-arm64.part1
 	/sbin/mkfs.vfat -C sct-arm64.part1 131071
 	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
-	cp ../edk2/ShellBinPkg/MinUefiShell/AArch64/Shell.efi mnt/
+	cp ../edk2/ShellBinPkg/UefiShell/AArch64/Shell.efi mnt/
 	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
 	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
@@ -115,7 +115,7 @@ sct-prepare:
 sct:
 	test -f sct-arm64.img || \
 	make sct-prepare
-	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
+	qemu-system-aarch64 -machine virt -cpu cortex-a57 -gdb tcp::1234 \
 	-bios denx/u-boot.bin -nographic -netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 \
