@@ -102,7 +102,7 @@ sct-prepare:
 	rm -f sct-i386.part1
 	/sbin/mkfs.vfat -C sct-i386.part1 131071
 	sudo mount sct-i386.part1 mnt -o uid=$(UID)
-	cp ../edk2/ShellBinPkg/MinUefiShell/Ia32/Shell.efi mnt/
+	cp ../edk2/ShellBinPkg/UefiShell/Ia32/Shell.efi mnt/
 	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${loadaddr} Shell.efi >> efi_shell.txt
 	echo bootefi \$${loadaddr} \$${fdtcontroladdr} >> efi_shell.txt
