@@ -791,6 +791,9 @@ CONFIG_SCSI_AHCI=y
 #
 # SATA/SCSI device support
 #
+# CONFIG_AHCI_PCI is not set
+# CONFIG_SATA_CEVA is not set
+# CONFIG_DWC_AHCI is not set
 # CONFIG_DWC_AHSATA is not set
 # CONFIG_FSL_SATA is not set
 # CONFIG_MVSATA_IDE is not set
@@ -1115,7 +1118,7 @@ CONFIG_RESET_SUNXI=y
 # CONFIG_RTC_MC146818 is not set
 # CONFIG_RTC_M41T62 is not set
 CONFIG_SCSI=y
-# CONFIG_DM_SCSI is not set
+CONFIG_DM_SCSI=y
 
 #
 # Serial drivers
