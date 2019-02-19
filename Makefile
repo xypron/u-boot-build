@@ -30,8 +30,6 @@ prepare:
 	cd denx && (git fetch || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
-	cd denx && (git remote -v | grep agraf || \
-	git remote add agraf https://github.com/agraf/u-boot.git)
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -d ipxe || git clone -v \
@@ -66,13 +64,12 @@ build:
 	test -f ipxe/src/bin-arm32-efi/snp.efi || make build-ipxe
 	cp ipxe/src/bin-arm32-efi/snp.efi tftp/snp-arm32.efi
 	cd denx && (git fetch origin || true)
-	cd denx && (git fetch agraf || true)
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	cd denx && git checkout master
+	cd denx && git rebase
 	cd denx && ( git branch -D pre-build || true )
-	cd denx && git checkout agraf/efi-next -b pre-build
-	cd denx && git rebase origin/master
+	cd denx && git checkout origin/master -b pre-build
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
