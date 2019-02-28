@@ -122,11 +122,11 @@ sct:
 check:
 	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1G -smp cores=2 \
-	-bios denx/u-boot.bin -nographic \
+	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 	test ! -f arm64.img || \
 	qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1G -smp cores=2 \
-	-bios denx/u-boot.bin -nographic \
+	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
 	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
@@ -144,12 +144,6 @@ check-el3:
 	-device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
 	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
-
-debug:
-	qemu-system-aarch64 -machine virt -cpu cortex-a57 \
-	-bios denx/u-boot.bin -nographic -gdb tcp::1234 -netdev \
-	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
-	-device e1000,netdev=eth0
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
