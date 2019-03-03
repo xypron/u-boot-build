@@ -1,0 +1,8 @@
+#!ipxe
+echo iPXE script started
+echo Trying to chain file:/boot.ipxe
+chain file:/boot.ipxe || echo Could not find file:/boot.ipxe
+echo Opening shell
+shell
+echo Rebooting
+reboot
