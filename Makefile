@@ -64,14 +64,14 @@ build-ipxe:
 	cp config/boot.ipxe ipxe/src/config/local/
 	cd ipxe/src && make bin-i386-efi/snp.efi -j$(NPROC) \
 	EMBED=config/local/boot.ipxe
-	cp ipxe/src/bin-i386-efi/snp.efi tftp
+	cp ipxe/src/bin-i386-efi/snp.efi tftp/snp-i386.efi
 
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	test -f tftp/snp.efi || make build-ipxe
+	test -f tftp/snp-i386.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
