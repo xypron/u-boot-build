@@ -140,7 +140,7 @@ check:
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 || \
 	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
 	-netdev \
-	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
+	user,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5
 
 clean:
