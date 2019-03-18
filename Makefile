@@ -61,9 +61,9 @@ build-ipxe:
 	cd ipxe && ../patch/patch-ipxe.sh
 	mkdir -p ipxe/src/config/local/
 	cp config/*.h ipxe/src/config/local/
-	cp config/boot.ipxe ipxe/src/config/local/
+	cp config/chain.ipxe ipxe/src/config/local/
 	cd ipxe/src && make bin-i386-efi/snp.efi -j$(NPROC) \
-	EMBED=config/local/boot.ipxe
+	EMBED=config/local/chain.ipxe
 	cp ipxe/src/bin-i386-efi/snp.efi tftp/snp-i386.efi
 
 build:
