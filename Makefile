@@ -79,7 +79,6 @@ build:
 	cd denx && ( git branch -D pre-build || true )
 	cd denx && git checkout origin/master -b pre-build
 	cd denx && ( git branch -D build || true )
-	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
 	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
