@@ -64,7 +64,7 @@ build-ipxe:
 
 build:
 	test -f ipxe/src/bin-arm32-efi/snp.efi || make build-ipxe
-	cp ipxe/src/bin-arm32-efi/snp.efi tftp
+	cp ipxe/src/bin-arm32-efi/snp.efi tftp/snp-arm32.efi
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
