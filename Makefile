@@ -44,7 +44,9 @@ prepare:
 
 build:
 	cd patch && (git fetch origin || true)
+	cd patch && (git am --abort || true)
 	cd patch && (git checkout $(TAGPREFIX)$(TAG))
+	cd patch && (git rebase)
 	cd denx && git fetch
 	cd denx && git verify-tag $(TAGPREFIX)$(TAG) 2>&1 | \
 	grep 'E872 DB40 9C1A 687E FBE8  6336 87F9 F635 D31D 7652'
