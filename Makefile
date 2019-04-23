@@ -98,8 +98,6 @@ sct-prepare:
 	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
 	cd sct.tmp && unzip UEFISCT.zip
 	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
-	cd sct.tmp && unzip IHVSCT.zip
-	cp sct.tmp/IHVSCT/SctPackageAARCH64/AARCH64/* mnt -R
 	rm mnt/Test/EbcBBTest.efi
 	rm -rf sct.tmp
 	rm -f sct-arm64.img
