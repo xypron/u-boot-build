@@ -16,10 +16,13 @@ export PYTHONPATH
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
+	export KVM=-enable-kvm
 	undefine CROSS_COMPILE
 else ifeq ("i686", $(MK_ARCH))
+	export KVM=-enable-kvm
 	undefine CROSS_COMPILE
 else
+	undefine KVM
 	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
 endif
 undefine MK_ARCH
@@ -95,12 +98,13 @@ sct-prepare:
 	mkdir -p mnt
 	sudo umount mnt || true
 	rm -f sct-i386.part1
-	/sbin/mkfs.vfat -C sct-i386.part1 131071
+	/sbin/mkfs.vfat -C sct-i386.part1 1047552
 	sudo mount sct-i386.part1 mnt -o uid=$(UID)
 	cp ../edk2/ShellBinPkg/UefiShell/Ia32/Shell.efi mnt/
-	echo scsi scan > efi_shell.txt
+	echo setenv bootargs > efi_shell.txt
+	echo scsi scan >> efi_shell.txt
 	echo load scsi 0:1 \$${loadaddr} Shell.efi >> efi_shell.txt
-	echo bootefi \$${loadaddr} \$${fdtcontroladdr} >> efi_shell.txt
+	echo bootefi \$${loadaddr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
 	test -f UEFI2.6SCTII_Final_Release.zip || \
@@ -125,7 +129,7 @@ sct:
 	test -f sct-i386.img || \
 	make sct-prepare
 	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
-	-netdev \
+	$(KVM) -netdev \
 	user,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
 	-drive if=none,file=sct-i386.img,id=mydisk,format=raw \
@@ -134,7 +138,7 @@ sct:
 
 check:
 	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
-	-netdev \
+	$(KVM) -netdev \
 	user,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
 	-drive if=none,file=sct-i386.img,id=mydisk,format=raw \
