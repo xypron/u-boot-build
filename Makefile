@@ -1,7 +1,7 @@
-# Build U-Boot for Odroid C2
+# Build U-Boot for Pine A64 LTS
 .POSIX:
 
-TAG=2019.04
+TAG=2019.07
 TAGPREFIX=v
 REVISION=001
 
@@ -97,6 +97,12 @@ clean:
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 	cp denx/u-boot-sunxi-with-spl.bin \
+	$(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+
+i:
+	mkdir -p $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+	cp /tmp/build/u-boot-sunxi-with-spl.bin \
 	$(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 
