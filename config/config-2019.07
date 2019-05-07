@@ -648,6 +648,12 @@ CONFIG_BLOCK_CACHE=y
 # CONFIG_BOOTCOUNT_LIMIT is not set
 
 #
+# Cache Controller drivers
+#
+# CONFIG_CACHE is not set
+# CONFIG_L2X0_CACHE is not set
+
+#
 # Clock
 #
 CONFIG_CLK=y
@@ -1170,9 +1176,11 @@ CONFIG_LZMA=y
 # CONFIG_LZO is not set
 CONFIG_GZIP=y
 CONFIG_ZLIB=y
+# CONFIG_ZSTD is not set
 # CONFIG_SPL_LZ4 is not set
 # CONFIG_SPL_LZO is not set
 # CONFIG_SPL_GZIP is not set
+# CONFIG_SPL_ZSTD is not set
 # CONFIG_ERRNO_STR is not set
 CONFIG_HEXDUMP=y
 CONFIG_OF_LIBFDT=y
