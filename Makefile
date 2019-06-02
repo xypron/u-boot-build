@@ -113,7 +113,7 @@ sct-prepare:
 sct:
 	test -f sct-arm64.img || \
 	make sct-prepare
-	qemu-system-aarch64 $(KVM) -machine virt \
+	qemu-system-aarch64 $(KVM) -machine virt -m 1G \
 	-bios denx/u-boot.bin -nographic -gdb tcp::1234 -netdev \
 	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
 	-device e1000,netdev=eth0 \
