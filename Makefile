@@ -38,7 +38,7 @@ prepare:
 	test -d patch/.git || \
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
-	http://git.denx.de/u-boot.git denx
+	https://gitlab.denx.de/u-boot/u-boot.git
 	cd denx && (git fetch origin || true)
 	cd denx && git config sendemail.aliasesfile doc/git-mailrc
 	cd denx && git config sendemail.aliasfiletype mutt
