@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.07-rc3 Configuration
+# U-Boot 2019.07-rc4 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -124,6 +124,7 @@ CONFIG_SYS_MALLOC_CLEAR_ON_INIT=y
 CONFIG_BUILD_ROM=y
 CONFIG_SPL_IMAGE="spl/u-boot-spl.bin"
 CONFIG_BUILD_TARGET=""
+# CONFIG_SYS_CUSTOM_LDSCRIPT is not set
 
 #
 # Boot images
@@ -534,6 +535,8 @@ CONFIG_ENV_IS_NOWHERE=y
 CONFIG_NET=y
 # CONFIG_NET_RANDOM_ETHADDR is not set
 # CONFIG_NETCONSOLE is not set
+# CONFIG_IP_DEFRAG is not set
+CONFIG_TFTP_BLOCKSIZE=512
 
 #
 # Device Drivers
@@ -903,6 +906,7 @@ CONFIG_DM_SPI=y
 # CONFIG_EXYNOS_SPI is not set
 # CONFIG_FSL_DSPI is not set
 # CONFIG_ICH_SPI is not set
+# CONFIG_MPC8XXX_SPI is not set
 # CONFIG_MTK_QSPI is not set
 # CONFIG_MVEBU_A3700_SPI is not set
 # CONFIG_ROCKCHIP_SPI is not set
@@ -920,7 +924,6 @@ CONFIG_DM_SPI=y
 # CONFIG_SH_QSPI is not set
 # CONFIG_KIRKWOOD_SPI is not set
 # CONFIG_LPC32XX_SSP is not set
-# CONFIG_MPC8XXX_SPI is not set
 # CONFIG_MXC_SPI is not set
 # CONFIG_MXS_SPI is not set
 # CONFIG_OMAP3_SPI is not set
@@ -1124,9 +1127,9 @@ CONFIG_VIRTIO_BLK=y
 # CONFIG_WATCHDOG is not set
 # CONFIG_WATCHDOG_RESET_DISABLE is not set
 # CONFIG_BCM2835_WDT is not set
+# CONFIG_IMX_WATCHDOG is not set
 # CONFIG_ULP_WATCHDOG is not set
 # CONFIG_WDT is not set
-# CONFIG_IMX_WATCHDOG is not set
 # CONFIG_PHYS_TO_BUS is not set
 
 #
