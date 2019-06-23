@@ -1,7 +1,7 @@
 # Build U-Boot for the Wandboard
 .POSIX:
 
-TAG=2018.11
+TAG=2019.07
 TAGPREFIX=v
 REVISION=001
 
