@@ -32,10 +32,8 @@ prepare:
 	test -d patch/.git || \
 	  git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
-	http://git.denx.de/u-boot.git denx
+	https://gitlab.denx.de/u-boot/u-boot denx
 	cd denx && (git fetch origin || true)
-	cd denx && \
-	  (git remote add agraf https://github.com/agraf/u-boot.git || true)
 	cd denx && git config sendemail.aliasesfile doc/git-mailrc
 	cd denx && git config sendemail.aliasfiletype mutt
 	gpg --list-keys 87F9F635D31D7652 || \
@@ -49,13 +47,11 @@ build:
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
 	cd denx && (git fetch origin || true)
-	cd denx && (git fetch agraf || true)
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	cd denx && git checkout master
 	cd denx && ( git branch -D pre-build || true )
-	cd denx && git checkout agraf/efi-next -b pre-build
-	cd denx && git rebase origin/master
+	cd denx && git checkout origin/master -b pre-build
 	cd denx && ( git branch -D build || true )
 	cd denx && ( git am --abort || true )
 	cd denx && git checkout -b build
