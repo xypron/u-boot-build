@@ -58,29 +58,11 @@ atf:
 	cp arm-trusted-firmware/build/qemu/debug/bl2.bin bl2.bin
 	cp arm-trusted-firmware/build/qemu/debug/bl31.bin bl31.bin
 
-build-ipxe:
-	cd ipxe && (git am --abort || true)
-	cd ipxe && (git fetch origin || true)
-	cd ipxe && (git am --abort || true)
-	cd ipxe && git reset --hard
-	cd ipxe && git checkout master
-	cd denx && ( git am --abort || true )
-	cd ipxe && git rebase
-	cd ipxe && ( git branch -D build || true )
-	cd ipxe && git checkout -b build
-	cd ipxe && ../patch/patch-ipxe.sh
-	mkdir -p ipxe/src/config/local/
-	cp config/*.h ipxe/src/config/local/
-	cp config/*.ipxe ipxe/src/config/local/
-	cd ipxe/src && make bin-arm64-efi/snp.efi -j$(NPROC) \
-	EMBED=config/local/chain.ipxe
-
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
 	cp ipxe/src/bin-arm64-efi/snp.efi tftp/snp-arm64.efi
 	cd denx && (git fetch origin || true)
 	cd denx && (git am --abort || true)
@@ -98,51 +80,20 @@ build:
 	cd denx && make oldconfig
 	cd denx && make -j$(NPROC)
 
+atf-debug:
+	cp denx/u-boot.bin bl33.bin
+	qemu-system-aarch64 -nographic -machine virt,secure=on \
+	-smp 2 -m 1024 -bios bl1.bin $(KVM) -gdb tcp::1234 -S \
+	-d unimp -semihosting-config enable,target=native
 atf-run:
-	arm-trusted-firmware/tools/fiptool/fiptool --verbose create \
-	--soc-fw denx/u-boot.bin bl32.bin
-	qemu-system-aarch64 -nographic -machine virt,secure=on -cpu cortex-a57 \
-	-smp 2 -m 1024 -bios bl1.bin \
+	cp denx/u-boot.bin bl33.bin
+	qemu-system-aarch64 -nographic -machine virt,secure=on \
+	-smp 2 -m 1024 -bios bl1.bin $(KVM) -gdb tcp::1234 \
 	-d unimp -semihosting-config enable,target=native
 
-sct-prepare:
-	mkdir -p mnt
-	sudo umount mnt || true
-	rm -f sct-arm64.part1
-	/sbin/mkfs.vfat -C sct-arm64.part1 131071
-	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
-	cp ../edk2/ShellBinPkg/UefiShell/AArch64/Shell.efi mnt/
-	echo scsi scan > efi_shell.txt
-	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
-	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
-	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
-	cp startup.nsh mnt/
-	test -f UEFI2.6SCTII_Final_Release.zip || \
-	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
-	rm -rf sct.tmp
-	mkdir sct.tmp
-	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
-	cd sct.tmp && unzip UEFISCT.zip
-	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
-	rm mnt/Test/EbcBBTest.efi
-	rm -rf sct.tmp
-	rm -f sct-arm64.img
-	sudo umount mnt || true
-	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
-	cat sct-arm64.part1 >> sct-arm64.img
-	rm sct-arm64.part1 efi_shell.txt
-	echo -e "image1: start=2048, type=ef\n" | \
-	/sbin/sfdisk sct-arm64.img
-
-sct:
-	test -f sct-arm64.img || \
-	make sct-prepare
-	qemu-system-aarch64 $(KVM) -machine virt -m 1G \
-	-bios denx/u-boot.bin -nographic -gdb tcp::1234 -netdev \
-	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
-	-device e1000,netdev=eth0 \
-	-drive if=none,file=sct-arm64.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+# -d unimp:			Log unimplemented functionality.
+# -semihosting-config:		Semihosting is used to load files from the host.
+# -machine virt,secure=on:	Start in EL3.
 
 check:
 	test -f arm64.img || \
@@ -152,19 +103,6 @@ check:
 	test ! -f arm64.img || \
 	qemu-system-aarch64 -machine virt -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin $(KVM) -nographic -gdb tcp::1234 \
-	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
-	-device e1000,netdev=eth0 \
-	-drive if=none,file=arm64.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
-
-check-el3:
-	test -f arm64.img || \
-	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a53 -m 1G -bios denx/u-boot.bin -nographic \
-	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
-	test ! -f arm64.img || \
-	qemu-system-aarch64 -machine virt,secure=true,virtualization=true \
-	-cpu cortex-a53 -m 1G -bios denx/u-boot.bin -nographic \
 	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
 	-device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
