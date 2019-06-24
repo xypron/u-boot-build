@@ -51,6 +51,7 @@ atf:
 	cd arm-trusted-firmware && git reset --hard
 	cd arm-trusted-firmware && git checkout master
 	cd arm-trusted-firmware && git reset --hard origin/master
+	cd arm-trusted-firmware && make CROSS_COMPILE='' -C tools/fiptool
 	cd arm-trusted-firmware && make PLAT=qemu -j $(NPROC) DEBUG=1
 	rm -f bl1.bin bl2.bin bl31.bin
 	cp arm-trusted-firmware/build/qemu/debug/bl1.bin bl1.bin
@@ -96,6 +97,13 @@ build:
 	cp config/config-$(TAG) denx/.config
 	cd denx && make oldconfig
 	cd denx && make -j$(NPROC)
+
+atf-run:
+	arm-trusted-firmware/tools/fiptool/fiptool --verbose create \
+	--soc-fw denx/u-boot.bin bl32.bin
+	qemu-system-aarch64 -nographic -machine virt,secure=on -cpu cortex-a57 \
+	-smp 2 -m 1024 -bios bl1.bin \
+	-d unimp -semihosting-config enable,target=native
 
 sct-prepare:
 	mkdir -p mnt
