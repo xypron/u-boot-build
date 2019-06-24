@@ -22,6 +22,7 @@ export LOCALVERSION:=-D$(REVISION)
 
 all:
 	make prepare
+	make atf
 	make build
 
 prepare:
@@ -34,12 +35,27 @@ prepare:
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
+	test -d arm-trusted-firmware || git clone -v \
+	https://github.com/ARM-software/arm-trusted-firmware.git \
+	arm-trusted-firmware
 	test -d ipxe || git clone -v \
 	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
 	mkdir -p tftp
+
+atf:
+	cd arm-trusted-firmware && (git am --abort || true)
+	cd arm-trusted-firmware && (git fetch origin || true)
+	cd arm-trusted-firmware && git reset --hard
+	cd arm-trusted-firmware && git checkout master
+	cd arm-trusted-firmware && git reset --hard origin/master
+	cd arm-trusted-firmware && make PLAT=qemu -j $(NPROC) DEBUG=1
+	rm -f bl1.bin bl2.bin bl31.bin
+	cp arm-trusted-firmware/build/qemu/debug/bl1.bin bl1.bin
+	cp arm-trusted-firmware/build/qemu/debug/bl2.bin bl2.bin
+	cp arm-trusted-firmware/build/qemu/debug/bl31.bin bl31.bin
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
