@@ -83,13 +83,24 @@ build:
 atf-debug:
 	cp denx/u-boot.bin bl33.bin
 	qemu-system-aarch64 -nographic -machine virt,secure=on \
-	-smp 2 -m 1024 -bios bl1.bin $(KVM) -gdb tcp::1234 -S \
+	-smp 2 -m 1024 -bios bl1.bin -cpu cortex-a53 -gdb tcp::1234 -S \
 	-d unimp -semihosting-config enable,target=native
 atf-run:
 	cp denx/u-boot.bin bl33.bin
+	test -f arm64.img || \
 	qemu-system-aarch64 -nographic -machine virt,secure=on \
-	-smp 2 -m 1024 -bios bl1.bin $(KVM) -gdb tcp::1234 \
-	-d unimp -semihosting-config enable,target=native
+	-smp 2 -m 1024 -bios bl1.bin -cpu cortex-a53 -gdb tcp::1234 \
+	-d unimp -semihosting-config enable,target=native \
+	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
+	-device e1000,netdev=eth0
+	test ! -f arm64.img || \
+	qemu-system-aarch64 -nographic -machine virt,secure=on \
+	-smp 2 -m 1024 -bios bl1.bin -cpu cortex-a53 -gdb tcp::1234 \
+	-d unimp -semihosting-config enable,target=native \
+	-netdev user,hostfwd=tcp::10022-:22,id=eth0,tftp=tftp \
+	-device e1000,netdev=eth0 \
+	-drive if=none,file=arm64.img,format=raw,id=mydisk \
+	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
 
 # -d unimp:			Log unimplemented functionality.
 # -semihosting-config:		Semihosting is used to load files from the host.
