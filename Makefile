@@ -23,6 +23,8 @@ export LOCALVERSION:=-D$(REVISION)
 
 export BL31=../arm-trusted-firmware/build/sun50i_a64/debug/bl31.bin
 
+export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port0"
+
 all:
 	make prepare
 	make atf
@@ -94,15 +96,20 @@ clean:
 	test ! -d arm-trusted-firmware || \
 	( cd arm-trusted-firmware && make distclean )
 
+flash:
+	relay-card off
+	sd-mux-ctrl -v 0 -ts
+	sleep 3
+	dd conv=fsync,notrunc if=denx/u-boot-sunxi-with-spl.bin \
+	of=/dev/sda bs=8k seek=1
+	sleep 1
+	sd-mux-ctrl -v 0 -d
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
+
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 	cp denx/u-boot-sunxi-with-spl.bin \
-	$(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
-	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
-
-i:
-	mkdir -p $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
-	cp /tmp/build/u-boot-sunxi-with-spl.bin \
 	$(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
 
