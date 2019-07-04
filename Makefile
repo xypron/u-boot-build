@@ -20,7 +20,7 @@ export LOCALVERSION:=-D$(REVISION)
 
 export DEVICE_TREE=armada-8040-mcbin
 export BL33=$(CURDIR)/denx/u-boot.bin
-export SCP_BL2=$(CURDIR)/binaries-marvell/mrvl_scp_bl2_mss_ap_cp1_a8040.img
+export SCP_BL2=$(CURDIR)/binaries-marvell/mrvl_scp_bl2.img
 
 all:
 	make prepare
@@ -74,17 +74,17 @@ atf:
 	cd patch && git rebase
 	cd binaries-marvell && git fetch
 	true
-	cd binaries-marvell && git checkout binaries-marvell-armada-18.06
+	cd binaries-marvell && git checkout binaries-marvell-armada-18.12
 	cd binaries-marvell && \
-	git reset --hard origin/binaries-marvell-armada-18.06
+	git reset --hard origin/binaries-marvell-armada-18.12
 	cd mv-ddr && git fetch
-	cd mv-ddr && git checkout mv_ddr-armada-18.09
-	cd mv-ddr && git reset --hard origin/mv_ddr-armada-18.09
-	test ! -f patch/patch-mv_ddr-armada-18.09 || \
-	(cd mv-ddr && ../patch/patch-mv_ddr-armada-18.09)
+	cd mv-ddr && git checkout mv_ddr-armada-18.12
+	cd mv-ddr && git reset --hard origin/mv_ddr-armada-18.12
+	test ! -f patch/patch-mv_ddr-armada-18.12 || \
+	(cd mv-ddr && ../patch/patch-mv_ddr-armada-18.12)
 	cd atf-marvell && git fetch
-	cd atf-marvell && git checkout atf-v1.5-armada-18.09
-	cd atf-marvell && git reset --hard origin/atf-v1.5-armada-18.09
+	cd atf-marvell && git checkout atf-v1.5-armada-18.12
+	cd atf-marvell && git reset --hard origin/atf-v1.5-armada-18.12
 	cd atf-marvell && make USE_COHERENT_MEM=0 LOG_LEVEL=20 \
 	MV_DDR_PATH=../mv-ddr PLAT=a80x0_mcbin all fip
 
