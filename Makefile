@@ -9,10 +9,10 @@ MESON_TOOLS_TAG=v0.1
 
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
-ifeq ("riscv64", $(MK_ARCH))
+ifeq ("riscv32", $(MK_ARCH))
 	undefine CROSS_COMPILE
 else
-	export CROSS_COMPILE=riscv64-linux-gnu-
+	export CROSS_COMPILE=riscv32-linux-gnu-
 endif
 undefine MK_ARCH
 
@@ -58,13 +58,13 @@ build:
 	cd denx && make -j6
 
 check:
-	qemu-system-riscv64 -machine virt -m 1G \
+	qemu-system-riscv32 -machine virt -m 1G \
 	-kernel denx/u-boot -nographic \
 	-device virtio-net-device,netdev=user \
 	-netdev user,id=user,tftp=tftp
 
 debug:
-	qemu-system-riscv64 -machine virt \
+	qemu-system-riscv32 -machine virt \
 	-kernel denx/u-boot -nographic -gdb tcp:1234 \
 	-device virtio-net-device,netdev=usernet \
 	-netdev user,id=usernet

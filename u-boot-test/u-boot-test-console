@@ -1,6 +1,6 @@
 #!/bin/sh
 touch /tmp/u-boot-monitor-socket
-qemu-system-riscv64 -machine virt -m 1G \
+qemu-system-riscv32 -machine virt -m 1G \
 -kernel u-boot -nographic \
 -device virtio-net-device,netdev=user \
 -netdev user,id=user,tftp=../tftp \
