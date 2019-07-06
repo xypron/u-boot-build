@@ -2,6 +2,6 @@
 touch /tmp/u-boot-monitor-socket
 qemu-system-riscv64 -machine virt -m 1G \
 -kernel u-boot -nographic \
--device virtio-net-device,netdev=usernet \
--netdev user,id=usernet
+-device virtio-net-device,netdev=user \
+-netdev user,id=user,tftp=../tftp \
 -monitor unix:/tmp/u-boot-monitor-socket,server,nowait

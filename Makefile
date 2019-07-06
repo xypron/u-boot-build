@@ -60,8 +60,8 @@ build:
 check:
 	qemu-system-riscv64 -machine virt -m 1G \
 	-kernel denx/u-boot -nographic \
-	-device virtio-net-device,netdev=usernet \
-	-netdev user,id=usernet
+	-device virtio-net-device,netdev=user \
+	-netdev user,id=user,tftp=tftp
 
 debug:
 	qemu-system-riscv64 -machine virt \
