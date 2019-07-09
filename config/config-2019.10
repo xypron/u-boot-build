@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.07-rc4 Configuration
+# U-Boot 2019.07 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -645,6 +645,7 @@ CONFIG_INPUT=y
 # CONFIG_MMC_BROKEN_CD is not set
 CONFIG_DM_MMC=y
 # CONFIG_FSL_ESDHC is not set
+# CONFIG_FSL_ESDHC_IMX is not set
 
 #
 # MTD Support
