@@ -1,7 +1,7 @@
 # Build U-Boot for x86
 .POSIX:
 
-TAG=2019.04
+TAG=2019.10
 TAGPREFIX=v
 REVISION=001
 
@@ -17,7 +17,7 @@ UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
 	undefine CROSS_COMPILE
-	export KVM=-enable-kvm -cpu phenom
+	export KVM=-enable-kvm -cpu native
 else
 	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
 	export KVM=-cpu core2duo
