@@ -17,10 +17,14 @@ UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
 	undefine CROSS_COMPILE
+	export KVM=-enable-kvm -cpu phenom
 else
 	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
+	export KVM=-cpu core2duo
 endif
 undefine MK_ARCH
+
+export KVM=-cpu core2duo
 
 export LOCALVERSION:=-P$(REVISION)
 export BUILD_ROM=y
@@ -64,12 +68,12 @@ build:
 	cd denx && make -j$(NPROC)
 
 check:
-	qemu-system-x86_64 -enable-kvm -bios denx/u-boot.rom -nographic \
-	-cpu core2duo -gdb tcp::1234 \
+	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
+	-gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 check-s:
-	qemu-system-x86_64 -bios denx/u-boot.rom -nographic \
-	-cpu core2duo -gdb tcp::1234 -S \
+	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
+	-gdb tcp::1234 -S \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 
 clean:
