@@ -77,7 +77,6 @@ build:
 	cd denx && git checkout -b pre-build
 	cd denx && ( git branch -D build || true )
 	cd denx && git checkout -b build
-	cd denx && git checkout -b build
 	cd denx && ../patch/patch-efi-next.sh
 	cd denx && make mrproper
 	cp config/config-$(TAG) denx/.config
