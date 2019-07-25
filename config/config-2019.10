@@ -290,6 +290,7 @@ CONFIG_HASH=y
 #
 # Update support
 #
+# CONFIG_ANDROID_AB is not set
 
 #
 # Blob list
@@ -445,6 +446,10 @@ CONFIG_CMD_ECHO=y
 CONFIG_CMD_ITEST=y
 CONFIG_CMD_SOURCE=y
 CONFIG_CMD_SETEXPR=y
+
+#
+# Android support commands
+#
 CONFIG_CMD_NET=y
 CONFIG_CMD_BOOTP=y
 CONFIG_CMD_DHCP=y
