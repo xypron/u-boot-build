@@ -147,6 +147,7 @@ CONFIG_SPL_LDSCRIPT="arch/arm/mach-omap2/u-boot-spl.lds"
 # CONFIG_TARGET_LS1088ARDB is not set
 # CONFIG_TARGET_LS1021AQDS is not set
 # CONFIG_TARGET_LS1021ATWR is not set
+# CONFIG_TARGET_LS1021ATSN is not set
 # CONFIG_TARGET_LS1021AIOT is not set
 # CONFIG_TARGET_LS1043AQDS is not set
 # CONFIG_TARGET_LS1043ARDB is not set
@@ -388,6 +389,7 @@ CONFIG_HASH=y
 # Update support
 #
 # CONFIG_UPDATE_TFTP is not set
+# CONFIG_ANDROID_AB is not set
 
 #
 # Blob list
@@ -612,6 +614,10 @@ CONFIG_CMD_ECHO=y
 CONFIG_CMD_ITEST=y
 CONFIG_CMD_SOURCE=y
 CONFIG_CMD_SETEXPR=y
+
+#
+# Android support commands
+#
 CONFIG_CMD_NET=y
 CONFIG_CMD_BOOTP=y
 CONFIG_CMD_DHCP=y
