@@ -17,7 +17,7 @@ UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
 	undefine CROSS_COMPILE
-	export KVM=-enable-kvm -cpu native
+	export KVM=-enable-kvm -cpu host
 else
 	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
 	export KVM=-cpu core2duo
