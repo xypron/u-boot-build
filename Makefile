@@ -28,7 +28,7 @@ prepare:
 	test -d patch/.git || \
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
-	https://gitlab.denx.de/u-boot/u-boot.git
+	https://gitlab.denx.de/u-boot/u-boot.git denx
 	cd denx && (git fetch origin || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
