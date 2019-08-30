@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
 echo ... $0 ...
-sd-mux-ctrl -v 0 -d
+sd-mux-ctrl -v 0 -td
 relay-card on
