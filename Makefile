@@ -102,6 +102,7 @@ sct-prepare:
 	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
 	rm mnt/Test/EbcBBTest.efi
 	rm -rf sct.tmp
+	cp config/uboot.seq mnt/Sequence/
 	rm -f sct-arm64.img
 	sudo umount mnt || true
 	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
