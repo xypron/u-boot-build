@@ -87,21 +87,16 @@ sct-prepare:
 	rm -f sct-arm64.part1
 	/sbin/mkfs.vfat -C sct-arm64.part1 131071
 	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
-	cp ../edk2/ShellBinPkg/UefiShell/AArch64/Shell.efi mnt/
 	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
 	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
-	test -f UEFI2.6SCTII_Final_Release.zip || \
-	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
-	rm -rf sct.tmp
-	mkdir sct.tmp
-	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
-	cd sct.tmp && unzip UEFISCT.zip
-	cp sct.tmp/UEFISCT/SctPackageAARCH64/AARCH64/* mnt -R
-	rm mnt/Test/EbcBBTest.efi
-	rm -rf sct.tmp
+	rsync -avP \
+	../edk2-build/edk2/Build/UefiSct/RELEASE_GCC5/SctPackageAARCH64/AARCH64/. \
+	mnt/ || true
+	cp ../edk2-build/edk2/Build/Shell/RELEASE_GCC5/AARCH64/Shell.efi mnt/
+	mkdir -p mnt/Sequence/
 	cp config/uboot.seq mnt/Sequence/
 	rm -f sct-arm64.img
 	sudo umount mnt || true
