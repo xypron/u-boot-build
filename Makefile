@@ -24,6 +24,8 @@ undefine MK_ARCH
 export LOCALVERSION:=-D$(REVISION)
 export BUILD_ROM=y
 
+export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port0"
+
 all:
 	which gmake && gmake prepare || make prepare
 	which gmake && gmake build || make build
@@ -87,6 +89,17 @@ build:
 clean:
 	cd denx && make distclean
 	rm tftp/snp.efi
+
+flash:
+	relay-card off
+	sd-mux-ctrl -e xypron-0001 -ts
+	sleep 3
+	dd conv=fsync,notrunc if=denx/u-boot-sunxi-with-spl.bin \
+	of=/dev/sda bs=8k seek=1
+	sleep 1
+	sd-mux-ctrl -e xypron-0001 -td
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/orangepi-pc/
