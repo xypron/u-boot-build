@@ -85,7 +85,7 @@ sct-prepare:
 	mkdir -p mnt
 	sudo umount mnt || true
 	rm -f sct-arm64.part1
-	/sbin/mkfs.vfat -C sct-arm64.part1 131071
+	/sbin/mkfs.vfat -F 32 -C sct-arm64.part1 131071
 	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
 	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
@@ -97,7 +97,7 @@ sct-prepare:
 	mnt/ || true
 	cp ../edk2-build/edk2/Build/Shell/RELEASE_GCC5/AARCH64/Shell.efi mnt/
 	mkdir -p mnt/Sequence/
-	cp config/uboot.seq mnt/Sequence/
+	cp config/*.seq mnt/Sequence/
 	rm -f sct-arm64.img
 	sudo umount mnt || true
 	dd if=/dev/zero of=sct-arm64.img bs=1024 count=1 seek=1023
