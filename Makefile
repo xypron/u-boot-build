@@ -117,6 +117,8 @@ sct-prepare:
 	cd sct.tmp && unzip IHVSCT.zip
 	cp sct.tmp/IHVSCT/SctPackageIA32/IA32/* mnt -R
 	rm -rf sct.tmp
+	mkdir -p mnt/Sequence/
+	cp config/*.seq mnt/Sequence/
 	rm -f sct-i386.img
 	sudo umount mnt || true
 	dd if=/dev/zero of=sct-i386.img bs=1024 count=1 seek=1023
