@@ -103,7 +103,7 @@ flash:
 	dd conv=fsync,notrunc if=denx/u-boot-sunxi-with-spl.bin \
 	of=/dev/sda bs=8k seek=1
 	sleep 1
-	sd-mux-ctrl -v 0 -d
+	sd-mux-ctrl -v 0 -td
 	relay-card on
 	picocom $(TTYDEVICE) --baud 115200
 
