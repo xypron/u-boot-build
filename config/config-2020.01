@@ -143,7 +143,6 @@ CONFIG_ARCH_QEMU=y
 # CONFIG_TARGET_LS1046AQDS is not set
 # CONFIG_TARGET_LS1046ARDB is not set
 # CONFIG_TARGET_LS1046AFRWY is not set
-# CONFIG_TARGET_H2200 is not set
 # CONFIG_TARGET_COLIBRI_PXA270 is not set
 # CONFIG_ARCH_UNIPHIER is not set
 # CONFIG_STM32 is not set
@@ -1048,6 +1047,12 @@ CONFIG_USB_STORAGE=y
 # CONFIG_USB_KEYBOARD is not set
 # CONFIG_USB_GADGET is not set
 # CONFIG_USB_HOST_ETHER is not set
+
+#
+# UFS Host Controller Support
+#
+# CONFIG_UFS is not set
+# CONFIG_TI_J721E_UFS is not set
 
 #
 # Graphics support
