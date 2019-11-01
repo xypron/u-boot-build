@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2019.10 Configuration
+# U-Boot 2020.01-rc1 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -804,6 +804,7 @@ CONFIG_SYS_FLASH_CFI=y
 #
 # SPI Flash Support
 #
+# CONFIG_SPI_FLASH is not set
 
 #
 # UBI support
