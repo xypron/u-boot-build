@@ -1,7 +1,7 @@
 # Build U-Boot for x86
 .POSIX:
 
-TAG=2019.10
+TAG=2020.01
 TAGPREFIX=v
 REVISION=001
 
