@@ -13,6 +13,8 @@ export PATH
 PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
+export BUILD_ROM=y
+
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("x86_64", $(MK_ARCH))
