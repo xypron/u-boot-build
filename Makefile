@@ -7,6 +7,8 @@ REVISION=001
 
 NPROC=${shell nproc}
 
+export TTYDEVICE="/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-port0"
+
 PATH:=$(PATH):$(CURDIR)/u-boot-test
 export PATH
 
@@ -97,6 +99,18 @@ build:
 	cd denx && make -j$(NPROC)
 
 check:
+
+flash:
+	relay-card off
+	sd-mux-ctrl -e xypron-0002 -td
+	sd-mux-ctrl -e xypron-0002 -ts
+	sleep 3
+	dd conv=fsync,notrunc if=denx/u-boot-sunxi-with-spl.bin \
+	of=/dev/sda bs=8k seek=1
+	sleep 1
+	sd-mux-ctrl -e xypron-0002 -td
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
 
 clean:
 	cd ipxe/src && make clean
