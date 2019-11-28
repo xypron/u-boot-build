@@ -25,6 +25,7 @@ export LOCALVERSION:=-D$(REVISION)
 export BUILD_ROM=y
 
 export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port0"
+export SDMUXDISK="/dev/disk/by-id/sd-mux-ctrl-0"
 
 all:
 	which gmake && gmake prepare || make prepare
@@ -95,7 +96,7 @@ flash:
 	sd-mux-ctrl -e xypron-0001 -ts
 	sleep 3
 	dd conv=fsync,notrunc if=denx/u-boot-sunxi-with-spl.bin \
-	of=/dev/sda bs=8k seek=1
+	of=$(SDMUXDISK) bs=8k seek=1
 	sleep 1
 	sd-mux-ctrl -e xypron-0001 -td
 	relay-card on
