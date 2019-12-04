@@ -89,7 +89,7 @@ sct-prepare:
 	sudo mount sct-arm64.part1 mnt -o uid=$(UID)
 	echo scsi scan > efi_shell.txt
 	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
-	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
+	echo bootefi \$${kernel_addr_r} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
 	rsync -avP \
