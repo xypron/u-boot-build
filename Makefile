@@ -92,6 +92,7 @@ sct-prepare:
 	echo bootefi \$${kernel_addr_r} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
+	touch mnt/run
 	rsync -avP \
 	../edk2-build/edk2/Build/UefiSct/RELEASE_GCC5/SctPackageAARCH64/AARCH64/. \
 	mnt/ || true
