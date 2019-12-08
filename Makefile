@@ -110,7 +110,7 @@ sct:
 
 check:
 	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
-	-gdb tcp::1234 \
+	-gdb tcp::1234 -machine pc-i440fx-2.5 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 check-s:
 	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
