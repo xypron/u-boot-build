@@ -123,13 +123,13 @@ sct-prepare:
 	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
-	test -f UEFI2.6SCTII_Final_Release.zip || \
-	wget http://www.uefi.org/sites/default/files/resources/UEFI2.6SCTII_Final_Release.zip
-	rm -rf sct.tmp
-	mkdir sct.tmp
-	unzip UEFI2.6SCTII_Final_Release.zip -d sct.tmp
-	rm -rf sct.tmp
-	rm -f sct-arm32.img
+	touch mnt/run
+	rsync -avP \
+	../edk2-build/edk2/Build/UefiSct/RELEASE_GCC5/SctPackageARM/ARM/. \
+	mnt/ || true
+	cp ../edk2-build/edk2/Build/Shell/RELEASE_GCC5/ARM/Shell.efi mnt/
+	mkdir -p mnt/Sequence/
+	cp config/uboot.seq mnt/Sequence/
 	sudo umount mnt || true
 	dd if=/dev/zero of=sct-arm32.img bs=1024 count=1 seek=1023
 	cat sct-arm32.part1 >> sct-arm32.img
