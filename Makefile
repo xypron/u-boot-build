@@ -91,6 +91,7 @@ sct-prepare:
 	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
 	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
 	cp startup.nsh mnt/
+	touch mnt/run
 	rm -rf sct.tmp
 	rm -f sct-arm.img
 	sudo umount mnt || true
