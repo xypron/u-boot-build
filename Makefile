@@ -120,14 +120,14 @@ check:
 	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin $(KVM) -nographic -gdb tcp::1234 \
-	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
-	-device virtio-rng-pci,disable-legacy=on \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
+	-device virtio-rng-pci
 	test ! -f arm64.img || \
 	qemu-system-aarch64 -machine virt -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin $(KVM) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
-	-device virtio-rng-pci,disable-legacy=on \
+	-device virtio-rng-pci \
 	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
 
 check-el3:
