@@ -147,11 +147,13 @@ check:
 	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
 	-drive if=none,file=sct-i386.img,id=mydisk,format=raw \
 	-device ich9-ahci,id=ahci \
-	-device ide-drive,drive=mydisk,bus=ahci.0 || \
+	-device ide-drive,drive=mydisk,bus=ahci.0 \
+	-device virtio-rng-pci || \
 	qemu-system-i386 -bios denx/u-boot.rom -nographic -gdb tcp::1234 \
 	-netdev \
 	user,id=eth0,tftp=tftp \
-	-device e1000,netdev=eth0 -machine pc-i440fx-2.5
+	-device e1000,netdev=eth0 -machine pc-i440fx-2.5 \
+	-device virtio-rng-pci
 
 clean:
 	cd denx && make distclean
