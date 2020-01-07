@@ -17,10 +17,7 @@ export BUILD_ROM=y
 
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
-ifeq ("x86_64", $(MK_ARCH))
-	export KVM=-enable-kvm
-	undefine CROSS_COMPILE
-else ifeq ("i686", $(MK_ARCH))
+ifeq ("i686", $(MK_ARCH))
 	export KVM=-enable-kvm
 	undefine CROSS_COMPILE
 else
