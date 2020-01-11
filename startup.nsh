@@ -11,3 +11,4 @@ echo run > run
 SCT -r
 echo Test results are in Report\result.csv
 echo DONE - SCT COMPLETED
+reset -s
