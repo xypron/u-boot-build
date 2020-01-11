@@ -111,11 +111,18 @@ sct:
 	test -f sct-arm64.img || \
 	make sct-prepare
 	qemu-system-aarch64 $(KVM) -machine virt -m 1G \
-	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
+	-bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci \
 	-drive if=none,file=sct-arm64.img,format=raw,id=mydisk \
 	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	mkdir -p sct-results
+
+sct-get-results:
+	sudo umount mnt || true
+	sudo mount sct-arm64.img mnt -o offset=1048576,ro
+	cp mnt Results/*.csv sct-results
+	sudo umount mnt
 
 check:
 	test -f arm64.img || \
