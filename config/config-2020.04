@@ -579,6 +579,7 @@ CONFIG_CMD_FS_GENERIC=y
 # CONFIG_CMD_BEDBUG is not set
 # CONFIG_CMD_DIAG is not set
 # CONFIG_CMD_LOG is not set
+# CONFIG_CMD_TRACE is not set
 # CONFIG_CMD_UBI is not set
 
 #
