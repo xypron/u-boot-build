@@ -121,7 +121,8 @@ sct:
 sct-get-results:
 	sudo umount mnt || true
 	sudo mount sct-arm64.img mnt -o offset=1048576,ro
-	cp mnt Results/*.csv sct-results
+	mkdir -p sct-results
+	cp mnt/Results/*.csv sct-results
 	sudo umount mnt
 
 check:
