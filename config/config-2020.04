@@ -91,6 +91,7 @@ CONFIG_ARM64_SUPPORT_AARCH32=y
 # CONFIG_ARCH_LPC32XX is not set
 # CONFIG_ARCH_IMX8 is not set
 # CONFIG_ARCH_IMX8M is not set
+# CONFIG_ARCH_IMXRT is not set
 # CONFIG_ARCH_MX23 is not set
 # CONFIG_ARCH_MX25 is not set
 # CONFIG_ARCH_MX28 is not set
