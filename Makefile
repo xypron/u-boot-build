@@ -1,7 +1,7 @@
 # Build U-Boot for the Tinker Board
 .POSIX:
 
-TAG=2020.01
+TAG=2020.04
 TAGPREFIX=v
 REVISION=001
 
@@ -99,6 +99,14 @@ flash:
 	of=$(SDMUXDISK) bs=8k seek=1
 	sleep 1
 	sd-mux-ctrl -e xypron-0001 -td
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
+
+check:
+	relay-card off
+	sleep 3
+	sd-mux-ctrl -e xypron-0001 -td
+	sleep 1
 	relay-card on
 	picocom $(TTYDEVICE) --baud 115200
 
