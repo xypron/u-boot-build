@@ -115,7 +115,7 @@ sct:
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci \
 	-drive if=none,file=sct-arm64.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 	mkdir -p sct-results
 
 sct-get-results:
@@ -137,7 +137,7 @@ check:
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
 	-device virtio-rng-pci \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 
 check-el3:
 	test -f arm64.img || \
@@ -149,7 +149,7 @@ check-el3:
 	-cpu cortex-a53 -m 1G -bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
