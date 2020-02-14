@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# U-Boot 2020.04-rc1 Configuration
+# U-Boot 2020.04-rc2 Configuration
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -431,9 +431,8 @@ CONFIG_CMD_CRC32=y
 # CONFIG_CMD_MD5SUM is not set
 # CONFIG_CMD_MEMINFO is not set
 CONFIG_CMD_MEMORY=y
-# CONFIG_MX_CYCLIC is not set
-# CONFIG_CMD_MEMTEST is not set
 # CONFIG_CMD_MX_CYCLIC is not set
+# CONFIG_CMD_MEMTEST is not set
 # CONFIG_CMD_SHA1SUM is not set
 # CONFIG_CMD_STRINGS is not set
 
@@ -590,7 +589,6 @@ CONFIG_CMD_FS_GENERIC=y
 # CONFIG_CMD_BEDBUG is not set
 # CONFIG_CMD_DIAG is not set
 CONFIG_CMD_LOG=y
-# CONFIG_CMD_TRACE is not set
 # CONFIG_CMD_UBI is not set
 
 #
@@ -938,7 +936,6 @@ CONFIG_PCIE_ECAM_GENERIC=y
 # CONFIG_PWM_SANDBOX is not set
 # CONFIG_U_QE is not set
 # CONFIG_RAM is not set
-CONFIG_RAM_ROCKCHIP_DEBUG=y
 
 #
 # Remote Processor drivers
@@ -1263,6 +1260,7 @@ CONFIG_LIB_DATE=y
 CONFIG_UNIT_TEST=y
 CONFIG_UT_LIB=y
 CONFIG_UT_LIB_ASN1=y
+CONFIG_UT_LOG=y
 CONFIG_UT_TIME=y
 CONFIG_UT_UNICODE=y
 CONFIG_UT_ENV=y
