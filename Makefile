@@ -1,7 +1,7 @@
-# Build U-Boot for QEMU arm64
+# Build U-Boot for MacchiatoBin
 .POSIX:
 
-TAG=2019.10
+TAG=2020.04
 TAGPREFIX=v
 REVISION=001
 
