@@ -44,8 +44,8 @@ prepare:
 	git clone https://github.com/MarvellEmbeddedProcessors/binaries-marvell
 	test -d mv-ddr || git clone \
 	https://github.com/MarvellEmbeddedProcessors/mv-ddr-marvell.git mv-ddr
-	test -d atf-marvell || \
-	git clone https://github.com/MarvellEmbeddedProcessors/atf-marvell.git
+	test -d trusted-firmware-a || \
+	git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
 
 
 build:
@@ -78,14 +78,14 @@ atf:
 	cd binaries-marvell && \
 	git reset --hard origin/binaries-marvell-armada-18.12
 	cd mv-ddr && git fetch
-	cd mv-ddr && git checkout mv_ddr-armada-18.12
-	cd mv-ddr && git reset --hard origin/mv_ddr-armada-18.12
-	test ! -f patch/patch-mv_ddr-armada-18.12 || \
-	(cd mv-ddr && ../patch/patch-mv_ddr-armada-18.12)
-	cd atf-marvell && git fetch
-	cd atf-marvell && git checkout atf-v1.5-armada-18.12
-	cd atf-marvell && git reset --hard origin/atf-v1.5-armada-18.12
-	cd atf-marvell && make USE_COHERENT_MEM=0 LOG_LEVEL=20 \
+	cd mv-ddr && git checkout mv_ddr-armada-atf-mainline
+	cd mv-ddr && git reset --hard origin/mv_ddr-armada-atf-mainline
+	test ! -f patch/patch-mv_ddr-armada-atf-mainline || \
+	(cd mv-ddr && ../patch/patch-mv_ddr-armada-atf-mainline)
+	cd trusted-firmware-a && git fetch
+	cd trusted-firmware-a && git checkout v2.2
+	cd trusted-firmware-a && git reset --hard v2.2
+	cd trusted-firmware-a && make USE_COHERENT_MEM=0 LOG_LEVEL=20 \
 	MV_DDR_PATH=../mv-ddr PLAT=a80x0_mcbin all fip
 
 clean:
@@ -93,7 +93,7 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/macchiatobin/
-	cp atf-marvell/build/a80x0_mcbin/release/flash-image.bin \
+	cp trusted-firmware-a/build/a80x0_mcbin/release/fip.bin \
 	$(DESTDIR)/usr/lib/u-boot/macchiatobin/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/macchiatobin/
 
