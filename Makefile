@@ -93,7 +93,7 @@ clean:
 
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/macchiatobin/
-	cp trusted-firmware-a/build/a80x0_mcbin/release/fip.bin \
+	cp trusted-firmware-a/build/a80x0_mcbin/release/flash-image.bin \
 	$(DESTDIR)/usr/lib/u-boot/macchiatobin/
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/macchiatobin/
 
