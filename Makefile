@@ -35,7 +35,7 @@ prepare:
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	https://gitlab.denx.de/u-boot/u-boot.git denx
-	cd denx && git fetch
+	cd denx && (git fetch --prune origin || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
 	test -d arm-trusted-firmware || git clone -v \
@@ -48,13 +48,13 @@ prepare:
 	git config --global user.name "somebody" )
 
 atf:
-	cd arm-trusted-firmware && (git fetch origin || true)
+	cd arm-trusted-firmware && (git fetch --prune origin || true)
 	cd arm-trusted-firmware && git rebase
 	cd arm-trusted-firmware && BL31= make PLAT=sun50i_a64 DEBUG=1 bl31
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
-	cd ipxe && (git fetch origin || true)
+	cd ipxe && (git fetch --prune origin || true)
 	cd ipxe && (git am --abort || true)
 	cd ipxe && git reset --hard
 	cd ipxe && git checkout master
@@ -72,11 +72,11 @@ build-ipxe:
 	cp ipxe/src/bin-arm64-efi/snp.efi tftp/snp-arm64.efi
 
 build:
-	cd patch && (git fetch origin || true)
+	cd patch && (git fetch --prune origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && git rebase
 	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
-	cd denx && (git fetch origin || true)
+	cd denx && (git fetch --prune origin || true)
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	cd denx && git checkout master
