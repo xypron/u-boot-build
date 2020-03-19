@@ -36,7 +36,7 @@ prepare:
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
 	https://gitlab.denx.de/u-boot/u-boot.git denx
-	cd denx && (git fetch origin || true)
+	cd denx && (git fetch origin --prune || true)
 	cd denx && git config sendemail.aliasesfile doc/git-mailrc
 	cd denx && git config sendemail.aliasfiletype mutt
 	gpg --list-keys 87F9F635D31D7652 || \
@@ -50,7 +50,7 @@ prepare:
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
-	cd ipxe && (git fetch origin || true)
+	cd ipxe && (git fetch origin --prune || true)
 	cd ipxe && (git am --abort || true)
 	cd ipxe && git reset --hard
 	cd ipxe && git checkout master
@@ -68,10 +68,10 @@ build-ipxe:
 build:
 	test -f ipxe/src/bin-arm32-efi/snp.efi || make build-ipxe
 	cp ipxe/src/bin-arm32-efi/snp.efi tftp
-	cd patch && (git fetch origin || true)
+	cd patch && (git fetch origin --prune || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	cd denx && (git fetch origin || true)
+	cd denx && (git fetch origin --prune || true)
 	cd denx && (git am --abort || true)
 	cd denx && git reset --hard
 	cd denx && git checkout master
