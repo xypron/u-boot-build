@@ -108,10 +108,10 @@ flash:
 	picocom $(TTYDEVICE) --baud 115200
 
 install:
-	mkdir -p $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+	mkdir -p $(DESTDIR)/usr/lib/u-boot/nanopi-neo2-black/
 	cp denx/u-boot-sunxi-with-spl.bin \
-	$(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
-	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+	$(DESTDIR)/usr/lib/u-boot/nanopi-neo2-black/
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/nanopi-neo2-black/
 
 uninstall:
-	rm -rf $(DESTDIR)/usr/lib/u-boot/pine-a64-lts/
+	rm -rf $(DESTDIR)/usr/lib/u-boot/nanopi-neo2-black/
