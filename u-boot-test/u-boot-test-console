@@ -2,5 +2,6 @@
 touch /tmp/u-boot-monitor-socket
 qemu-system-aarch64 -machine virt -cpu cortex-a57 \
 -bios u-boot.bin -nographic \
--netdev user,id=eth0,tftp=../tftp -device e1000,netdev=eth0
+-netdev user,id=eth0,tftp=../tftp -device e1000,netdev=eth0 \
+-device virtio-rng-pci  \
 -monitor unix:/tmp/u-boot-monitor-socket,server,nowait
