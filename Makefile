@@ -19,9 +19,12 @@ undefine MK_ARCH
 
 export LOCALVERSION:=-D$(REVISION)
 
+export BL31:=$(CURDIR)/trusted-firmware-a/build/gxbb/debug/bl31.bin
+
 all:
 	make prepare
 	make build
+	make atf
 	make fip_create
 	make sign
 
@@ -88,6 +91,12 @@ build:
 	cd denx && make oldconfig
 	cd denx && make -j $(NPROC)
 
+atf:
+	cd trusted-firmware-a && git fetch
+	cd trusted-firmware-a && git checkout v2.2
+	cd trusted-firmware-a && git reset --hard v2.2
+	cd trusted-firmware-a && make DEBUG=1 PLAT=gxbb bl31
+
 fip_create:
 	cd hardkernel && git fetch
 	cd hardkernel && git reset --hard
@@ -101,7 +110,7 @@ fip_create:
 	cp denx/u-boot.bin hardkernel/fip/gxb/bl33.bin
 	cd hardkernel/fip/gxb && ../fip_create \
 	  --bl30 bl30.bin --bl301 bl301.bin \
-	  --bl31 bl31.bin --bl33 bl33.bin fip.bin
+	  --bl31 $(BL31) --bl33 bl33.bin fip.bin
 	cd hardkernel/fip/gxb && cat bl2.package fip.bin > boot_new.bin
 
 sign:
