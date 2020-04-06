@@ -39,6 +39,9 @@ prepare:
 	test -d meson-tools || git clone -v \
 	https://github.com/afaerber/meson-tools.git meson-tools
 	cd meson-tools && git fetch
+	test -d trusted-firmware-a || \
+	git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+	cd trusted-firmware-a && git fetch
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -d ipxe || git clone -v \
