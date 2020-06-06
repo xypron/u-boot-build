@@ -21,7 +21,7 @@ export ARCH=arm64
 
 export LOCALVERSION:=-D$(REVISION)
 
-export BL31=../arm-trusted-firmware/build/sun50i_a64/debug/bl31.bin
+export BL31=../trusted-firmware-a/build/sun50i_a64/debug/bl31.bin
 
 export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port0"
 
@@ -38,9 +38,9 @@ prepare:
 	cd denx && (git fetch --prune origin || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
-	test -d arm-trusted-firmware || git clone -v \
-	https://github.com/ARM-software/arm-trusted-firmware.git \
-	arm-trusted-firmware
+	test -d trusted-firmware-a || git clone -v \
+	https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git \
+	trusted-firmware-a
 	test -d ipxe || git clone -v \
 	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
@@ -48,9 +48,9 @@ prepare:
 	git config --global user.name "somebody" )
 
 atf:
-	cd arm-trusted-firmware && (git fetch --prune origin || true)
-	cd arm-trusted-firmware && git rebase
-	cd arm-trusted-firmware && BL31= make PLAT=sun50i_a64 DEBUG=1 bl31
+	cd trusted-firmware-a && (git fetch --prune origin || true)
+	cd trusted-firmware-a && git rebase
+	cd trusted-firmware-a && BL31= make PLAT=sun50i_a64 DEBUG=0 bl31
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
@@ -93,8 +93,8 @@ build:
 
 clean:
 	test ! -d denx || ( cd denx && make mrproper )
-	test ! -d arm-trusted-firmware || \
-	( cd arm-trusted-firmware && make distclean )
+	test ! -d trusted-firmware-a || \
+	( cd trusted-firmware-a && make distclean )
 
 flash:
 	relay-card off
