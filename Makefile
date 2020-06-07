@@ -82,38 +82,6 @@ build:
 sct-prepare:
 	mkdir -p mnt
 	sudo umount mnt || true
-	rm -f sct-arm.part1
-	/sbin/mkfs.vfat -C sct-arm.part1 131071
-	sudo mount sct-arm.part1 mnt -o uid=$(UID)
-	cp ../edk2/ShellBinPkg/UefiShell/Arm/Shell.efi mnt/
-	echo scsi scan > efi_shell.txt
-	echo load scsi 0:1 \$${kernel_addr_r} Shell.efi >> efi_shell.txt
-	echo bootefi \$${kernel_addr_r} \$${fdtcontroladdr} >> efi_shell.txt
-	mkimage -T script -n 'run EFI shell' -d efi_shell.txt mnt/boot.scr
-	cp startup.nsh mnt/
-	touch mnt/run
-	rm -rf sct.tmp
-	rm -f sct-arm.img
-	sudo umount mnt || true
-	dd if=/dev/zero of=sct-arm.img bs=1024 count=1 seek=1023
-	cat sct-arm.part1 >> sct-arm.img
-	rm sct-arm.part1 efi_shell.txt
-	echo -e "image1: start=2048, type=ef\n" | \
-	/sbin/sfdisk sct-arm.img
-
-sct:
-	test -f sct-arm.img || \
-	make sct-prepare
-	qemu-system-arm -machine virt -cpu cortex-a15 -gdb tcp::1234 \
-	-bios denx/u-boot.bin -nographic -netdev \
-	user,id=eth0,tftp=tftp,net=192.168.76.0/24,dhcpstart=192.168.76.9 \
-	-device e1000,netdev=eth0 \
-	-drive if=none,file=sct-arm.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
-
-sct-prepare:
-	mkdir -p mnt
-	sudo umount mnt || true
 	rm -f sct-arm32.part1
 	/sbin/mkfs.vfat -C sct-arm32.part1 131071
 	sudo mount sct-arm32.part1 mnt -o uid=$(UID)
