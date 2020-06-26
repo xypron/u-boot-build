@@ -58,10 +58,10 @@ build:
 	cd denx && make -j6
 
 check:
-	qemu-system-riscv64 -machine virt -m 1G \
-	-kernel denx/u-boot -nographic \
-	-device virtio-net-device,netdev=user \
-	-netdev user,id=user,tftp=tftp
+	qemu-system-riscv64 -machine virt -m 1G -nographic \
+	-bios denx/u-boot \
+	-device virtio-net-device,netdev=net0 \
+	-netdev user,id=net0,tftp=tftp
 
 debug:
 	qemu-system-riscv64 -machine virt \
