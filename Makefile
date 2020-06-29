@@ -82,6 +82,8 @@ build-optee:
 	CFG_ARM64_core=y \
 	CFG_TEE_BENCHMARK=n \
 	CFG_TEE_CORE_LOG_LEVEL=3 \
+	CFG_DT_ADDR=0x40000000 \
+	CFG_EXTERNAL_DTB_OVERLAY=y \
 	CROSS_COMPILE=aarch64-linux-gnu- \
 	CROSS_COMPILE_core=aarch64-linux-gnu- \
 	CROSS_COMPILE_ta_arm32=arm-linux-gnueabihf- \
@@ -115,7 +117,7 @@ atf:
 	cd trusted-firmware-a && git fetch
 	cd trusted-firmware-a && git checkout v2.2
 	cd trusted-firmware-a && git reset --hard v2.2
-	cd trusted-firmware-a && make DEBUG=1 PLAT=gxbb bl31
+	cd trusted-firmware-a && make NEED_BL32=y DEBUG=1 PLAT=gxbb bl31
 
 fip_create:
 	cd hardkernel && git fetch
