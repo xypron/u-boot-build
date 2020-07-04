@@ -1,7 +1,7 @@
 # Build U-Boot for sandbox
 .POSIX:
 
-TAG=2020.04
+TAG=2020.07
 TAGPREFIX=v
 REVISION=001
 
@@ -14,13 +14,7 @@ PYTHONPATH:=$(CURDIR)/u-boot-test
 export PYTHONPATH
 
 UID="${shell id -u $(USER)}"
-MK_ARCH="${shell uname -m}"
-ifeq ("x86_64", $(MK_ARCH))
-	undefine CROSS_COMPILE
-else
-	export CROSS_COMPILE=/usr/bin/x86_64-linux-gnu-
-endif
-undefine MK_ARCH
+undefine CROSS_COMPILE
 
 export LOCALVERSION:=-P$(REVISION)
 export BUILD_ROM=y
