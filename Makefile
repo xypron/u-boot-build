@@ -126,7 +126,7 @@ sct-get-results:
 	sudo umount mnt
 
 check:
-	if test -f envstore.img ||
+	test -f envstore.img || \
 	qemu-img create -f raw envstore.img 64M
 	test -f arm64.img || \
 	qemu-system-aarch64 -machine virt -m 1G -smp cores=2 \
