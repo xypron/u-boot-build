@@ -62,7 +62,7 @@ build:
 	cd denx && make -j$(NPROC)
 
 flash:
-	kflash/kflash.py -p $(TTY) -B bit_mic denx/u-boot-dtb.bin
+	kflash/kflash.py -p $(TTY) -B maixduino denx/u-boot-dtb.bin
 	picocom -b 115200 $(TTY)
 
 clean:
