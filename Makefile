@@ -65,6 +65,10 @@ flash:
 	kflash/kflash.py -p $(TTY) -B maixduino denx/u-boot-dtb.bin
 	picocom -b 115200 $(TTY)
 
+run:
+	./reset.py $(TTY)
+	picocom -b 115200 $(TTY)
+
 clean:
 	test ! -d denx || ( cd denx && make clean )
 	rm -rf envstore.img

@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: gcc (Debian 9.3.0-15) 9.3.0
+# Compiler: riscv64-linux-gnu-gcc (Debian 10.1.0-3) 10.1.0
 #
 CONFIG_CREATE_ARCH_SYMLINK=y
 # CONFIG_ARC is not set
@@ -418,6 +418,7 @@ CONFIG_MTDPARTS_DEFAULT=""
 # CONFIG_CMD_DIAG is not set
 # CONFIG_CMD_IRQ is not set
 # CONFIG_CMD_LOG is not set
+# CONFIG_CMD_TRACE is not set
 # CONFIG_CMD_UBI is not set
 
 #
@@ -812,7 +813,7 @@ CONFIG_TIMER=y
 # CONFIG_ATCPIT100_TIMER is not set
 # CONFIG_ATMEL_PIT_TIMER is not set
 # CONFIG_CADENCE_TTC_TIMER is not set
-# CONFIG_DESIGNWARE_APB_TIMER is not set
+CONFIG_DESIGNWARE_APB_TIMER=y
 # CONFIG_MPC83XX_TIMER is not set
 # CONFIG_RENESAS_OSTM_TIMER is not set
 # CONFIG_NOMADIK_MTU_TIMER is not set
