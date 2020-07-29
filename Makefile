@@ -63,11 +63,11 @@ build:
 
 flash:
 	kflash/kflash.py -p $(TTY) -B maixduino denx/u-boot-dtb.bin
-	picocom -b 115200 $(TTY)
+	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
 
 run:
 	./reset.py $(TTY)
-	picocom -b 115200 $(TTY)
+	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
