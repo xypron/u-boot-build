@@ -276,6 +276,8 @@ CONFIG_CMD_ENV_EXISTS=y
 # CONFIG_CMD_ENV_FLAGS is not set
 CONFIG_CMD_NVEDIT_EFI=y
 # CONFIG_CMD_NVEDIT_INFO is not set
+# CONFIG_CMD_NVEDIT_LOAD is not set
+# CONFIG_CMD_NVEDIT_SELECT is not set
 
 #
 # Memory commands
@@ -466,6 +468,8 @@ CONFIG_ENV_IS_NOWHERE=y
 # CONFIG_SYS_RELOC_GD_ENV_ADDR is not set
 # CONFIG_USE_DEFAULT_ENV_FILE is not set
 # CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is not set
+# CONFIG_ENV_APPEND is not set
+# CONFIG_ENV_WRITEABLE_LIST is not set
 # CONFIG_ENV_ACCESS_IGNORE_FORCE is not set
 # CONFIG_NET is not set
 
@@ -518,6 +522,11 @@ CONFIG_HAVE_BLOCK_DEVICE=y
 CONFIG_BLOCK_CACHE=y
 # CONFIG_IDE is not set
 # CONFIG_BOOTCOUNT_LIMIT is not set
+
+#
+# Button Support
+#
+# CONFIG_BUTTON is not set
 
 #
 # Cache Controller drivers
@@ -585,6 +594,7 @@ CONFIG_CPU_RISCV=y
 # CONFIG_DA8XX_GPIO is not set
 # CONFIG_INTEL_BROADWELL_GPIO is not set
 # CONFIG_IMX_RGPIO2P is not set
+# CONFIG_IPROC_GPIO is not set
 # CONFIG_LPC32XX_GPIO is not set
 # CONFIG_MXC_GPIO is not set
 # CONFIG_MXS_GPIO is not set
