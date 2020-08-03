@@ -29,6 +29,9 @@ prepare:
 	test -d denx || git clone -v \
 	https://gitlab.denx.de/u-boot/u-boot.git denx
 	cd denx && (git fetch origin --prune || true)
+	test -d opensbi || git clone -v \
+	https://github.com/riscv/opensbi.git
+	cd openspbi && (git fetch origin --prune || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
 	gpg --list-keys FA2ED12D3E7E013F || \
