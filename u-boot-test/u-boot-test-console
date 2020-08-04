@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export TTY=/dev/serial/by-id/usb-Kongou_Hikari_Sipeed-Debug_615655CD93-if00-port0
+
+../reset.py $TTY
+picocom -b 115200 --send-cmd "sz -vv" $TTY
