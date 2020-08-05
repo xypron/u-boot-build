@@ -62,7 +62,7 @@ build:
 	cd denx && make -j$(NPROC)
 
 flash:
-	kflash/kflash.py -p $(TTY) -B maixduino denx/u-boot-dtb.bin
+	kflash/kflash.py -p $(TTY) -b 1500000 -B maixduino denx/u-boot-dtb.bin
 	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
 
 run:
