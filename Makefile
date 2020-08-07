@@ -1,7 +1,7 @@
-# Build U-Boot for the Tinker Board
+# Build U-Boot for the OrangePi PC
 .POSIX:
 
-TAG=2020.07
+TAG=2020.10
 TAGPREFIX=v
 REVISION=001
 
