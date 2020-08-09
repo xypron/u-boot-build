@@ -111,7 +111,7 @@ sct:
 	test -f sct-arm64.img || \
 	make sct-prepare
 	qemu-system-aarch64 $(KVM) -machine virt -m 1G \
-	-bios denx/u-boot.bin -nographic \
+	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci \
 	-drive if=none,file=sct-arm64.img,format=raw,id=mydisk \
