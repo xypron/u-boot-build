@@ -1,7 +1,7 @@
-# Build U-Boot for QEMU RISC-V
+# Build U-Boot for QEMU RISC-V 64bit
 .POSIX:
 
-TAG=2020.01
+TAG=2020.10
 TAGPREFIX=v
 REVISION=001
 
