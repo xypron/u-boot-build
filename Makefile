@@ -59,7 +59,7 @@ build:
 
 check:
 	qemu-system-riscv64 -machine virt -m 1G -nographic \
-	-bios denx/u-boot \
+	-bios denx/u-boot -smp cores=2 -gdb tcp::1234 \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp
 
