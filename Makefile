@@ -61,6 +61,16 @@ build:
 	cd denx && make oldconfig
 	cd denx && make -j$(NPROC)
 
+sbi:
+	cd opensbi && make \
+	PLATFORM=kendryte/k210 \
+	FW_PAYLOAD=y \
+	FW_PAYLOAD_OFFSET=0x20000 \
+	FW_PAYLOAD_PATH=../denx/u-boot-dtb.bin
+	kflash/kflash.py -p $(TTY) -b 1500000 -B maixduino \
+	opensbi/build/platform/kendryte/k210/firmware/fw_payload.bin
+	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
+
 flash:
 	kflash/kflash.py -p $(TTY) -b 1500000 -B maixduino denx/u-boot-dtb.bin
 	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
@@ -72,6 +82,8 @@ run:
 clean:
 	test ! -d denx || ( cd denx && make clean )
 	rm -rf envstore.img
+	rm -rf opensbi/build
+
 install:
 
 uninstall:
