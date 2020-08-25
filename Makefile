@@ -50,7 +50,7 @@ prepare:
 atf:
 	cd trusted-firmware-a && (git fetch --prune origin || true)
 	cd trusted-firmware-a && git rebase
-	cd trusted-firmware-a && BL31= make PLAT=sun50i_a64 DEBUG=0 bl31
+	cd trusted-firmware-a && BL31= make PLAT=sun50i_a64 DEBUG=1 bl31
 
 build-ipxe:
 	cd ipxe && (git am --abort || true)
