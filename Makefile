@@ -17,7 +17,7 @@ endif
 undefine MK_ARCH
 
 export LOCALVERSION:=-D$(REVISION)
-export TTY:=/dev/serial/by-id/usb-Kongou_Hikari_Sipeed-Debug_615655CD93-if00-port0
+export TTY:=/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
 
 all:
 	make prepare
@@ -67,12 +67,12 @@ sbi:
 	FW_PAYLOAD=y \
 	FW_PAYLOAD_OFFSET=0x20000 \
 	FW_PAYLOAD_PATH=../denx/u-boot-dtb.bin
-	kflash/kflash.py -p $(TTY) -b 1500000 -B maixduino \
+	kflash/kflash.py -p $(TTY) -b 1500000 -B dan \
 	opensbi/build/platform/kendryte/k210/firmware/fw_payload.bin
 	picocom -b 115200 --send-cmd "sz -vv" $(TTY)
 
 flash:
-	kflash/kflash.py -p $(TTY) -b 1500000 -B maixduino denx/u-boot-dtb.bin
+	kflash/kflash.py -p $(TTY) -b 1500000 -B dan denx/u-boot-dtb.bin
 	picocom -b 115200 --send-cmd "sz -b -vv" $(TTY)
 
 run:

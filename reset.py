@@ -20,9 +20,9 @@ class Communicate:
         self.device.setDTR (False)
         self.device.setRTS (False)
         time.sleep(0.1)
-        self.device.setDTR (True)
+        self.device.setRTS (True)
         time.sleep(0.1)
-        self.device.setDTR (False)
+        self.device.setRTS (False)
         time.sleep(0.1)
 
 def main():
