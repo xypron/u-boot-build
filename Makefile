@@ -1,7 +1,7 @@
-# Build U-Boot for QEMU arm64
+# Build U-Boot for Raspberry 3
 .POSIX:
 
-TAG=2020.01
+TAG=2020.10
 TAGPREFIX=v
 REVISION=001
 
