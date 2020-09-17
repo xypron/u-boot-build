@@ -66,12 +66,6 @@ check:
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp
 
-debug:
-	qemu-system-riscv64 -machine virt \
-	-kernel denx/u-boot -nographic -gdb tcp:1234 \
-	-device virtio-net-device,netdev=usernet \
-	-netdev user,id=usernet
-
 clean:
 	test ! -d denx || ( cd denx && make clean )
 
