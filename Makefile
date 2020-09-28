@@ -125,6 +125,9 @@ sct-get-results:
 	cp mnt/Results/*.csv sct-results
 	sudo umount mnt
 
+atf:
+	cd trusted-firmware-a && make PLAT=qemu
+
 check:
 	test -f envstore.img || \
 	qemu-img create -f raw envstore.img 64M
