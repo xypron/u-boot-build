@@ -1,7 +1,7 @@
 # Build U-Boot for QEMU arm64
 .POSIX:
 
-TAG=2020.10
+TAG=2021.01
 TAGPREFIX=v
 REVISION=001
 
