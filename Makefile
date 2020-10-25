@@ -1,7 +1,7 @@
 # Build U-Boot for sandbox
 .POSIX:
 
-TAG=2020.07
+TAG=2021.01
 TAGPREFIX=v
 REVISION=001
 
