@@ -1,7 +1,7 @@
 # Build U-Boot for Pine A64 LTS
 .POSIX:
 
-TAG=2020.07
+TAG=2021.01
 TAGPREFIX=v
 REVISION=001
 
@@ -28,6 +28,7 @@ export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port
 all:
 	make prepare
 	make atf
+	make build-crust
 	make build
 
 prepare:
@@ -41,11 +42,18 @@ prepare:
 	test -d trusted-firmware-a || git clone -v \
 	https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git \
 	trusted-firmware-a
+	test -d crust || git clone -v https://github.com/crust-firmware/crust
 	test -d ipxe || git clone -v \
 	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
 	( git config --global user.email "somebody@example.com"  && \
 	git config --global user.name "somebody" )
+
+build-crust:
+	cd crust && (git fetch --prune origin || true)
+	cd crust && git rebase
+	cd crust && make pine64_plus_defconfig
+	cd crust && make -j$(NPROC)
 
 atf:
 	cd trusted-firmware-a && (git fetch --prune origin || true)
