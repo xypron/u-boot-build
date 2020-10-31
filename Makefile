@@ -7,7 +7,7 @@ REVISION=001
 
 NPROC=${shell nproc}
 
-export TTYDEVICE="/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-port0"
+export TTYDEVICE="/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0"
 
 PATH:=$(PATH):$(CURDIR)/u-boot-test
 export PATH
