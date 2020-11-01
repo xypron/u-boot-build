@@ -25,10 +25,11 @@ export BL31=../trusted-firmware-a/build/sun50i_a64/debug/bl31.bin
 
 export TTYDEVICE="/dev/serial/by-path/platform-3f980000.usb-usb-0:1.1.3:1.0-port0"
 
+export export SCP=/dev/null
+
 all:
 	make prepare
 	make atf
-	make build-crust
 	make build
 
 prepare:
@@ -52,8 +53,8 @@ prepare:
 build-crust:
 	cd crust && (git fetch --prune origin || true)
 	cd crust && git rebase
-	cd crust && make pine64_plus_defconfig
-	cd crust && make -j$(NPROC)
+	cd crust && CROSS_COMPILE=or1k-linux-musl- HOST_COMPILE=/usr/bin/ make pine64_plus_defconfig
+	cd crust && CROSS_COMPILE=or1k-linux-musl- HOST_COMPILE=/usr/bin/ make -j$(NPROC)
 
 atf:
 	cd trusted-firmware-a && (git fetch --prune origin || true)
