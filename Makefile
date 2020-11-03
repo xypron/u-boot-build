@@ -61,10 +61,20 @@ build:
 	cd denx && make -j6
 
 check:
+	test -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -nographic \
 	-bios denx/u-boot -smp cores=2 -gdb tcp::1234 \
 	-device virtio-net-device,netdev=net0 \
-	-netdev user,id=net0,tftp=tftp
+	-netdev user,id=net0,tftp=tftp \
+	-device virtio-rng-pci
+	test ! -f riscv64.img || \
+	qemu-system-riscv64 -machine virt -m 1G -nographic \
+	-bios denx/u-boot -smp cores=2 -gdb tcp::1234 \
+	-device virtio-net-device,netdev=net0 \
+	-netdev user,id=net0,tftp=tftp \
+	-drive if=none,file=riscv64.img,format=raw,id=mydisk \
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0 \
+	-device virtio-rng-pci
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
