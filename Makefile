@@ -76,6 +76,18 @@ check:
 	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0 \
 	-device virtio-rng-pci
 
+sct:
+	test -f sct-riscv64.img || \
+	make sct-prepare
+	qemu-system-riscv64 $(KVM) -machine virt -m 1G \
+	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
+	-device virtio-net-device,netdev=net0 \
+	-netdev user,id=net0,tftp=tftp \
+	-device virtio-rng-pci \
+	-drive if=none,file=sct-riscv64.img,format=raw,id=mydisk \
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
+	mkdir -p sct-results
+
 clean:
 	test ! -d denx || ( cd denx && make clean )
 
