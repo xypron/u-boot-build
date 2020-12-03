@@ -105,6 +105,11 @@ clean:
 	test ! -d trusted-firmware-a || \
 	( cd trusted-firmware-a && make distclean )
 
+run:
+	sd-mux-ctrl -v 0 -td
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
+
 flash:
 	relay-card off
 	sd-mux-ctrl -v 0 -ts
