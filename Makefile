@@ -112,19 +112,20 @@ sct:
 	-bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=sct-arm32.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0 \
+	-device virtio-rng-pci
 
 check:
 	test -f arm32.img || \
 	qemu-system-arm -machine virt -cpu cortex-a15 -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -nographic \
 	-device e1000,netdev=eth0 -netdev user,id=eth0,tftp=tftp \
-	-gdb tcp::1234
+	-gdb tcp::1234 -device virtio-rng-pci
 	test ! -f arm32.img || \
 	qemu-system-arm -machine virt -cpu cortex-a15 -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -nographic \
 	-device e1000,netdev=eth0 -netdev user,id=eth0,tftp=tftp \
-	-gdb tcp::1234 \
+	-gdb tcp::1234 -device virtio-rng-pci \
 	-drive if=none,file=arm32.img,format=raw,id=mydisk \
 	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
 
