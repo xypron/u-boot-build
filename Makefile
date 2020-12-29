@@ -109,9 +109,19 @@ sct:
 	-device ide-drive,drive=mydisk,bus=ahci.0
 
 check:
-	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
-	-gdb tcp::1234 -machine pc-i440fx-2.5 \
-	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
+	test -f x86_64.img || \
+	qemu-system-x86_64 -machine pc-i440fx-2.5 -m 1G -smp cores=2 \
+	-bios denx/u-boot.rom $(KVM) -nographic -gdb tcp::1234 \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
+	-device virtio-rng-pci
+	test ! -f x86_64.img || \
+	qemu-system-x86_64 -machine pc-i440fx-2.5 -m 1G -smp cores=2 \
+	-bios denx/u-boot.rom $(KVM) -nographic -gdb tcp::1234 \
+	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
+	-drive if=none,file=x86_64.img,format=raw,id=mydisk \
+	-device virtio-rng-pci \
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
+
 check-s:
 	qemu-system-x86_64 $(KVM) -bios denx/u-boot.rom -nographic \
 	-gdb tcp::1234 -S \
