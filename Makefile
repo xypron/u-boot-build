@@ -112,7 +112,7 @@ sct:
 	-bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=sct-arm32.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0 \
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0 \
 	-device virtio-rng-pci
 
 check:
@@ -127,7 +127,7 @@ check:
 	-device e1000,netdev=eth0 -netdev user,id=eth0,tftp=tftp \
 	-gdb tcp::1234 -device virtio-rng-pci \
 	-drive if=none,file=arm32.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-drive,drive=mydisk,bus=ahci.0
+	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
