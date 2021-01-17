@@ -1,7 +1,7 @@
 # Build U-Boot for MaixDuino
 .POSIX:
 
-TAG=2020.10
+TAG=2020.04
 TAGPREFIX=v
 REVISION=001
 
