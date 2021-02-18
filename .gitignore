@@ -1,0 +1,8 @@
+denx/
+foo/
+hardkernel/
+meson-tools/
+mnt/
+*.img
+job.log
+u-boot.bin
