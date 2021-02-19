@@ -1,7 +1,7 @@
 # Build U-Boot for Odroid HC4
 .POSIX:
 
-TAG=2021.01
+TAG=2021.04
 TAGPREFIX=v
 REVISION=001
 
