@@ -20,7 +20,6 @@ undefine MK_ARCH
 export LOCALVERSION:=-D$(REVISION)
 
 export BL31:=$(CURDIR)/trusted-firmware-a/build/gxbb/debug/bl31.bin
-export BL32:=$(CURDIR)/optee_os/out/odroid-c2/core/bl32.img
 
 all:
 	make prepare
@@ -46,8 +45,6 @@ prepare:
 	test -d trusted-firmware-a || \
 	git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
 	cd trusted-firmware-a && git fetch
-	test -d optee_os || git clone -v \
-	https://github.com/OP-TEE/optee_os.git
 	gpg --list-keys FA2ED12D3E7E013F || \
 	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -d ipxe || git clone -v \
@@ -74,29 +71,10 @@ build-ipxe:
 	EMBED=config/local/chain.ipxe
 	cp ipxe/src/bin-arm64-efi/snp.efi tftp
 
-build-optee:
-	cd optee_os &&  (git fetch origin || true)
-	cd optee_os &&  (git rebase)
-	cd optee_os && \
-	make -j$(NPROC) \
-	CFG_ARM64_core=y \
-	CFG_TEE_BENCHMARK=n \
-	CFG_TEE_CORE_LOG_LEVEL=3 \
-	CFG_DT_ADDR=0x40000000 \
-	CFG_EXTERNAL_DTB_OVERLAY=y \
-	CROSS_COMPILE=aarch64-linux-gnu- \
-	CROSS_COMPILE_core=aarch64-linux-gnu- \
-	CROSS_COMPILE_ta_arm32=arm-linux-gnueabihf- \
-	CROSS_COMPILE_ta_arm64=aarch64-linux-gnu- \
-	DEBUG=1 \
-	O=out/odroid-c2 \
-	PLATFORM=amlogic
-
 build:
 	cd patch && (git fetch origin || true)
 	cd patch && (git checkout efi-next)
 	cd patch && (git rebase)
-	test -f $(BL32) || make build-optee
 	test -f ipxe/src/bin-arm64-efi/snp.efi || make build-ipxe
 	cd denx && (git fetch origin || true)
 	cd denx && (git am --abort || true)
@@ -117,7 +95,7 @@ atf:
 	cd trusted-firmware-a && git fetch
 	cd trusted-firmware-a && git checkout v2.2
 	cd trusted-firmware-a && git reset --hard v2.2
-	cd trusted-firmware-a && make NEED_BL32=y DEBUG=1 PLAT=gxbb bl31
+	cd trusted-firmware-a && make BL31= DEBUG=1 PLAT=gxbb bl31
 
 fip_create:
 	cd hardkernel && git fetch
@@ -130,10 +108,10 @@ fip_create:
 	cd hardkernel/tools/fip_create && make
 	cp hardkernel/tools/fip_create/fip_create hardkernel/fip
 	cp denx/u-boot.bin hardkernel/fip/gxb/bl33.bin
+	rm hardkernel/fip/gxb/fip.bin
 	cd hardkernel/fip/gxb && ../fip_create \
 	  --bl30 bl30.bin --bl301 bl301.bin \
 	  --bl31 $(BL31) \
-	  --bl32 $(BL32) \
 	  --bl33 bl33.bin fip.bin
 	cd hardkernel/fip/gxb && cat bl2.package fip.bin > boot_new.bin
 
