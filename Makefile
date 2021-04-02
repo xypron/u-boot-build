@@ -88,6 +88,10 @@ sct:
 	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 	mkdir -p sct-results
 
+sbi:
+	cd opensbi && make PLATFORM=generic
+	cp opensbi/build/platform/generic/firmware/fw_dynamic.bin denx
+
 clean:
 	test ! -d denx || ( cd denx && make clean )
 
