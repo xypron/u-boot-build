@@ -30,11 +30,6 @@ prepare:
 	cd denx && (git fetch || true)
 	test -d opensbi || git clone -v \
 	https://github.com/riscv/opensbi.git
-	cd opensbi && (git fetch origin --prune || true)
-	gpg --list-keys 87F9F635D31D7652 || \
-	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
-	gpg --list-keys FA2ED12D3E7E013F || \
-	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -f ~/.gitconfig || \
 	  ( git config --global user.email "somebody@example.com"  && \
 	  git config --global user.name "somebody" )
@@ -89,8 +84,7 @@ sct:
 	mkdir -p sct-results
 
 sbi:
-	cd opensbi && make PLATFORM=generic
-	cp opensbi/build/platform/generic/firmware/fw_dynamic.bin denx
+	cd opensbi && make PLATFORM=generic FW_PAYLOAD_PATH=../denx/u-boot.bin
 
 clean:
 	test ! -d denx || ( cd denx && make clean )
