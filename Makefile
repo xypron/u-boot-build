@@ -1,7 +1,7 @@
 # Build U-Boot for MacchiatoBin
 .POSIX:
 
-TAG=2020.04
+TAG=2021.10
 TAGPREFIX=v
 REVISION=001
 
