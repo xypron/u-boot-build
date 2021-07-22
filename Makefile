@@ -26,7 +26,7 @@ prepare:
 	test -d patch/.git || \
 	git submodule init patch && git submodule update patch
 	test -d denx || git clone -v \
-	https://gitlab.denx.de/u-boot/u-boot.git
+	https://gitlab.denx.de/u-boot/u-boot.git denx
 	cd denx && (git fetch || true)
 	test -d opensbi || git clone -v \
 	https://github.com/riscv/opensbi.git
