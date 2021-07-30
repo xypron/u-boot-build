@@ -102,6 +102,11 @@ flash:
 	relay-card on
 	picocom $(TTYDEVICE) --baud 115200
 
+run:
+	sd-mux-ctrl -e xypron-0001 -td
+	relay-card on
+	picocom $(TTYDEVICE) --baud 115200
+
 check:
 	relay-card off
 	sleep 3
