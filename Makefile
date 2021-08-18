@@ -118,6 +118,6 @@ check:
 install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/orangepi-pc/
 	cp denx/u-boot-sunxi-with-spl.bin $(DESTDIR)/usr/lib/u-boot/orangepi-pc/
-	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/tinker/
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/orangepi-pc/
 
 uninstall:
