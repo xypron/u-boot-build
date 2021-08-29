@@ -45,6 +45,7 @@ sbi:
 	PLATFORM=generic FW_PAYLOAD_PATH=../denx/u-boot.bin
 
 build:
+	test -f denx/ubootefi.var || cp config ubootefi.var denx
 	test -f opensbi/$(OPENSBI) || make sbi
 	cd patch && (git fetch origin || true)
 	cd patch && (git am --abort || true)
@@ -73,6 +74,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/lib/u-boot/unmatched/
 	cp denx/spl/u-boot-spl.bin $(DESTDIR)/usr/lib/u-boot/unmatched/
 	cp denx/u-boot.itb $(DESTDIR)/usr/lib/u-boot/unmatched/
+	cp denx/.config $(DESTDIR)/usr/lib/u-boot/unmatched/config
 	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/unmatched/
 
 uninstall:
