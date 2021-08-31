@@ -58,7 +58,8 @@ build:
 check:
 	test -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -nographic \
-	-bios denx/u-boot -smp cores=2 -gdb tcp::1234 \
+	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-device virtio-rng-pci
@@ -75,7 +76,8 @@ sct:
 	test -f sct-riscv64.img || \
 	make sct-prepare
 	qemu-system-riscv64 $(KVM) -machine virt -m 1G \
-	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
+	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-device virtio-rng-pci \
