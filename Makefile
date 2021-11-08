@@ -1,7 +1,7 @@
 # Build U-Boot for HiFive Unmateched
 .POSIX:
 
-TAG=2021.10
+TAG=2022.01
 TAGPREFIX=v
 REVISION=001
 
