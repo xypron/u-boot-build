@@ -21,6 +21,7 @@ export LOCALVERSION:=-D$(REVISION)
 all:
 	make prepare
 	make build
+	make sbi
 
 prepare:
 	test -d patch/.git || \
@@ -57,15 +58,16 @@ build:
 
 check:
 	test -f riscv64.img || \
-	qemu-system-riscv64 -machine virt -m 1G -nographic \
+	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
 	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
 	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-device virtio-rng-pci
 	test ! -f riscv64.img || \
-	qemu-system-riscv64 -machine virt -m 1G -nographic \
-	-bios denx/u-boot -smp cores=2 -gdb tcp::1234 \
+	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
+	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-drive if=none,file=riscv64.img,format=raw,id=mydisk \
