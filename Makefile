@@ -1,7 +1,7 @@
 # Build U-Boot for the OrangePi PC
 .POSIX:
 
-TAG=2020.10
+TAG=2022.01
 TAGPREFIX=v
 REVISION=001
 
