@@ -32,8 +32,6 @@ prepare:
 	cd denx && (git fetch origin --prune || true)
 	gpg --list-keys 87F9F635D31D7652 || \
 	gpg --keyserver keys.gnupg.net --recv-key 87F9F635D31D7652
-	gpg --list-keys FA2ED12D3E7E013F || \
-	gpg --keyserver keys.gnupg.net --recv-key FA2ED12D3E7E013F
 	test -d ipxe || git clone -v \
 	http://git.ipxe.org/ipxe.git ipxe
 	test -f ~/.gitconfig || \
