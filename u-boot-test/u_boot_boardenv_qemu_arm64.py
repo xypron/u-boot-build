@@ -21,8 +21,8 @@ env__efi_loader_grub_file = {
 
 env__efi_loader_helloworld_file = {
     "fn": "helloworld.efi",
-    "size": 4480,
-    "crc32": "19f9c0ab",
+    "size": 4576,
+    "crc32": "8d6854b1",
     "addr": 0x40400000,
 }
 
