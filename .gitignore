@@ -1,0 +1,6 @@
+job.log
+foo/
+denx/
+hardkernel/
+meson-tools/
+u-boot.bin
