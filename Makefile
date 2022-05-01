@@ -11,10 +11,12 @@ UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
 	undefine CROSS_COMPILE
-	export KVM=-enable-kvm -cpu host
+	export CPU=host
+	export ACCEL=kvm
 else
 	export CROSS_COMPILE=aarch64-linux-gnu-
-	export KVM=-cpu cortex-a53
+	export CPU=cortex-a72
+	export ACCEL=tcg,thread=multi
 endif
 undefine MK_ARCH
 
@@ -108,8 +110,9 @@ sct-prepare:
 sct:
 	test -f sct-arm64.img || \
 	make sct-prepare
-	qemu-system-aarch64 $(KVM) -machine virt -m 1G \
-	-bios denx/u-boot.bin -nographic -gdb tcp::1234 \
+	qemu-system-aarch64 \
+	-machine virt,gic-version=max -accel $(ACCEL) -m 1G \
+	-bios denx/u-boot.bin -cpu $(CPU) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci \
 	-drive if=none,file=sct-arm64.img,format=raw,id=mydisk \
@@ -131,15 +134,15 @@ check:
 	qemu-img create -f raw envstore.img 64M
 	test -f arm64.img || \
 	qemu-system-aarch64 \
-	-machine virt,gic-version=max -m 1G -smp cores=2 \
-	-bios denx/u-boot.bin $(KVM) -nographic -gdb tcp::1234 \
+	-machine virt,gic-version=max -accel $(ACCEL) -m 1G -smp cores=2 \
+	-bios denx/u-boot.bin -cpu $(CPU) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=pflash,format=raw,index=1,file=envstore.img \
 	-device virtio-rng-pci
 	test ! -f arm64.img || \
 	qemu-system-aarch64 \
-	-machine virt,gic-version=max -m 1G -smp cores=2 \
-	-bios denx/u-boot.bin $(KVM) -nographic -gdb tcp::1234 \
+	-machine virt,gic-version=max -accel $(ACCEL) -m 1G -smp cores=2 \
+	-bios denx/u-boot.bin -cpu $(CPU) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=arm64.img,format=raw,id=mydisk \
 	-drive if=pflash,format=raw,index=1,file=envstore.img \
