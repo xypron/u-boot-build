@@ -18,3 +18,10 @@ undefine MK_ARCH
 all:
 	make prepare
 	make build
+
+install:
+	mkdir -p $(DESTDIR)/usr/lib/u-boot/icicle/
+	cp sd_fusing.sh $(DESTDIR)/usr/lib/u-boot/icicle/
+	cd denx && \
+	hss-payload-generator -c ../config/u-boot.yaml ../u-boot.img
+	mv u-boot.img $(DESTDIR)/usr/lib/u-boot/icicle/u-boot.img
