@@ -59,6 +59,7 @@ build:
 check:
 	test -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
+	-gdb tcp::1234 \
 	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
 	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
@@ -66,6 +67,7 @@ check:
 	-device virtio-rng-pci
 	test ! -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
+	-gdb tcp::1234 \
 	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
 	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
