@@ -58,20 +58,20 @@ build:
 
 check:
 	test -f riscv64.img || \
-	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
-	-gdb tcp::1234 \
-	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 \
+	-nographic \
 	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
+	-gdb tcp::1234 \
 	-device virtio-rng-pci
 	test ! -f riscv64.img || \
-	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 -nographic \
-	-gdb tcp::1234 \
-	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 \
+	-nographic \
 	-kernel denx/u-boot \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
+	-gdb tcp::1234 \
 	-drive if=none,file=riscv64.img,format=raw,id=mydisk \
 	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0 \
 	-device virtio-rng-pci
@@ -80,8 +80,7 @@ sct:
 	test -f sct-riscv64.img || \
 	make sct-prepare
 	qemu-system-riscv64 $(KVM) -machine virt -m 1G \
-	-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-	-kernel denx/u-boot \
+	-kernel denx/u-boot.bin \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-device virtio-rng-pci \
