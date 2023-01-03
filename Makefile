@@ -108,7 +108,7 @@ fip_create:
 	cd hardkernel/tools/fip_create && make
 	cp hardkernel/tools/fip_create/fip_create hardkernel/fip
 	cp denx/u-boot.bin hardkernel/fip/gxb/bl33.bin
-	rm hardkernel/fip/gxb/fip.bin
+	rm -f hardkernel/fip/gxb/fip.bin
 	cd hardkernel/fip/gxb && ../fip_create \
 	  --bl30 bl30.bin --bl301 bl301.bin \
 	  --bl31 $(BL31) \
