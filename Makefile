@@ -1,13 +1,6 @@
 # Build U-Boot for QEMU RISC-V 64bit
 .POSIX:
 
-TAG=2020.10
-TAGPREFIX=v
-REVISION=001
-
-MESON_TOOLS_TAG=v0.1
-
-UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("riscv64", $(MK_ARCH))
 	undefine CROSS_COMPILE
