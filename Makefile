@@ -53,7 +53,8 @@ check:
 	test -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 \
 	-nographic \
-	-kernel denx/u-boot \
+	-bios denx/spl/u-boot-spl.bin \
+	-device loader,file=denx/u-boot.itb,addr=0x80200000 \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-gdb tcp::1234 \
@@ -61,7 +62,8 @@ check:
 	test ! -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 \
 	-nographic \
-	-kernel denx/u-boot \
+	-bios denx/spl/u-boot-spl.bin \
+	-device loader,file=denx/u-boot.itb,addr=0x80200000 \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-gdb tcp::1234 \
