@@ -133,14 +133,14 @@ check:
 	test -f envstore.img || \
 	qemu-img create -f raw envstore.img 64M
 	test -f arm64.img || \
-	qemu-system-aarch64 \
+	qemu-system-aarch64 -semihosting \
 	-machine virt,gic-version=max -accel $(ACCEL) -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -cpu $(CPU) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0,romfile= \
 	-drive if=pflash,format=raw,index=0,file=envstore.img \
 	-device virtio-rng-pci
 	test ! -f arm64.img || \
-	qemu-system-aarch64 \
+	qemu-system-aarch64 -semihosting \
 	-machine virt,gic-version=max -accel $(ACCEL) -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -cpu $(CPU) -nographic -gdb tcp::1234 \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0,romfile= \
