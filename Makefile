@@ -58,18 +58,21 @@ check:
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-gdb tcp::1234 \
-	-device virtio-rng-pci
+	-device virtio-rng-pci \
+	-device qemu-xhci
 	test ! -f riscv64.img || \
 	qemu-system-riscv64 -machine virt -m 1G -smp cpus=2 \
 	-nographic \
 	-bios denx/spl/u-boot-spl.bin \
-	-device loader,file=denx/u-boot.itb,addr=0x80200000 \
 	-device virtio-net-device,netdev=net0 \
 	-netdev user,id=net0,tftp=tftp \
 	-gdb tcp::1234 \
-	-drive if=none,file=riscv64.img,format=raw,id=mydisk \
-	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0 \
-	-device virtio-rng-pci
+	-device virtio-rng-pci \
+	-drive file=riscv64.img,format=raw,if=none,id=NVME1 \
+	-device nvme,drive=NVME1,serial=nvme-1 \
+	-drive if=none,file=riscv65.img,format=raw,id=mydisk \
+	-device usb-ehci,id=usb \
+	-device usb-storage,bus=usb.0,drive=mydisk
 
 sct:
 	test -f sct-riscv64.img || \
