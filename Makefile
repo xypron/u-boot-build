@@ -10,6 +10,11 @@ NPROC=${shell nproc}
 UID="${shell id -u $(USER)}"
 MK_ARCH="${shell uname -m}"
 ifeq ("aarch64", $(MK_ARCH))
+	HAVE_KVM="${shell if if test -e /dev/kvm; then echo true; else echo false; fi}
+else
+	HAVE_KVM="false"
+endif
+ifeq ("true", $(HAVE_KVM))
 	undefine CROSS_COMPILE
 	export CPU=host
 	export ACCEL=kvm
