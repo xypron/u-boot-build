@@ -20,7 +20,7 @@ ifeq ("true", $(HAVE_KVM))
 	export ACCEL=kvm
 else
 	export CROSS_COMPILE=aarch64-linux-gnu-
-	export CPU=cortex-a72
+	export CPU=max
 	export ACCEL=tcg,thread=multi
 endif
 undefine MK_ARCH
@@ -158,7 +158,7 @@ check-el3:
 	test -f arm64.img || \
 	qemu-system-aarch64 \
 	-machine virt,gic-version=max,secure=true,virtualization=true \
-	-cpu cortex-a53 -m 1G -bios denx/u-boot.bin -nographic \
+	-cpu $(CPU) -m 1G -bios denx/u-boot.bin -nographic \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0
 	test ! -f arm64.img || \
 	qemu-system-aarch64 \
