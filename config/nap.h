@@ -1,3 +1,2 @@
-#undef NAP_EFIX86
-#undef NAP_EFIARM
+#undef NAP_EFI
 #define NAP_NULL
