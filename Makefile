@@ -118,12 +118,12 @@ check:
 	qemu-system-arm -machine virt -cpu cortex-a15 -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -nographic \
 	-device e1000,netdev=eth0 -netdev user,id=eth0,tftp=tftp \
-	-gdb tcp::1234 -device virtio-rng-pci
+	-gdb tcp::1234 -device virtio-rng-pci -semihosting
 	test ! -f arm32.img || \
 	qemu-system-arm -machine virt -cpu cortex-a15 -m 1G -smp cores=2 \
 	-bios denx/u-boot.bin -nographic \
 	-device e1000,netdev=eth0 -netdev user,id=eth0,tftp=tftp \
-	-gdb tcp::1234 -device virtio-rng-pci \
+	-gdb tcp::1234 -device virtio-rng-pci -semihosting \
 	-drive if=none,file=arm32.img,format=raw,id=mydisk \
 	-device ich9-ahci,id=ahci -device ide-hd,drive=mydisk,bus=ahci.0
 
