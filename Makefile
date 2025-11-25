@@ -11,7 +11,7 @@ NPROC=${shell nproc}
 
 export CROSS_COMPILE=aarch64-linux-gnu-
 export M0_CROSS_COMPILE=arm-none-eabi-
-export BL31=/usr/lib/arm-trusted-firmware/rk3399/bl31.elf
+# export BL31=/usr/lib/arm-trusted-firmware/rk3399/bl31.elf
 
 all:
 	make build
@@ -35,6 +35,9 @@ tfa: trusted-firmware-a
 
 build: denx
 	cd denx && \
+	git fetch && \
+	git reset --hard origin/master && \
+	../patch/patch-u-boot.sh && \
 	make rock-pi-4-rk3399_defconfig && \
 	make -j$(NPROC)
 	
