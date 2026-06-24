@@ -111,12 +111,14 @@ sct:
 check:
 	test -f x86_64.img || \
 	qemu-system-x86_64 -machine pc-i440fx-10.1 -m 1G -smp cores=2 \
-	-bios denx/u-boot.rom $(KVM) -nographic -gdb tcp::1234 \
+	-bios denx/u-boot.rom $(KVM) -serial mon:stdio -gdb tcp::1234 \
+	-device bochs-display \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci
 	test ! -f x86_64.img || \
 	qemu-system-x86_64 -machine pc-i440fx-10.1 -m 1G -smp cores=2 \
-	-bios denx/u-boot.rom $(KVM) -nographic -gdb tcp::1234 \
+	-bios denx/u-boot.rom $(KVM) -serial mon:stdio -gdb tcp::1234 \
+	-device bochs-display \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-drive if=none,file=x86_64.img,format=raw,id=mydisk \
 	-device virtio-rng-pci \
