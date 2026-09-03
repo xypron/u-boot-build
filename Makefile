@@ -4,6 +4,8 @@
 TAG=2019.10
 TAGPREFIX=v
 REVISION=001
+# pc (i.e. i440fx-*) or q35
+MACHINE=pc
 
 NPROC=${shell nproc}
 
@@ -23,8 +25,6 @@ else
 	export KVM=-cpu core2duo
 endif
 undefine MK_ARCH
-
-export KVM=-cpu core2duo
 
 export LOCALVERSION:=-P$(REVISION)
 export BUILD_ROM=y
@@ -110,13 +110,13 @@ sct:
 
 check:
 	test -f x86_64.img || \
-	qemu-system-x86_64 -machine pc-i440fx-10.1 -m 1G -smp cores=2 \
+	qemu-system-x86_64 -machine $(MACHINE) -m 1G -smp cores=2 \
 	-bios denx/u-boot.rom $(KVM) -serial mon:stdio -gdb tcp::1234 \
 	-device bochs-display \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
 	-device virtio-rng-pci
 	test ! -f x86_64.img || \
-	qemu-system-x86_64 -machine pc-i440fx-10.1 -m 1G -smp cores=2 \
+	qemu-system-x86_64 -machine $(MACHINE) -m 1G -smp cores=2 \
 	-bios denx/u-boot.rom $(KVM) -serial mon:stdio -gdb tcp::1234 \
 	-device bochs-display \
 	-netdev user,id=eth0,tftp=tftp -device e1000,netdev=eth0 \
